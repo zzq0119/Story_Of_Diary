@@ -1,0 +1,3 @@
+安装了Andriod Studio（可能遇到的问题：sdk与模拟器，gradle玄学报错）
+因为找不到什么适合初学者的教程，找到了一段据说是适合初学的代码，和大家分享一下：https://blog.csdn.net/tangjie134/article/details/79525937）
+在csdn看了一些乱七八糟的入门教程，发现其实都大同小异。。。
