@@ -1,0 +1,1 @@
+- 成功将django+uwsgi+nginx部署在azure服务器上
