@@ -1,0 +1,2 @@
+- 学习django官方教程，目前做到了教程4
+- 安装了Android Studio
