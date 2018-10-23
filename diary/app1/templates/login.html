@@ -1,0 +1,30 @@
+﻿<style>
+h1{text-align:center}
+h3{text-align:center}
+</style>
+<h1>登录</h1>
+{%if error_mess%}
+<h3>{{error_mess}}</h3>
+{%endif%}
+<form action="{% url 'login'%}" method="post">
+{%csrf_token%}
+<table align="center">
+<tr>
+<td>用户名:</td>
+<td><input type="text" name="user" placeholder="不超过20字符"></td>
+</tr>
+<tr>
+<td>密码:</td>
+<td><input type="password" name="password" placeholder="不超过20字符"></td>
+</tr>
+<tr>
+<td> </td>
+</tr>
+<tr align="center">
+<td colspan="2">
+<input type="submit" value="登录" name="login" id="login">
+<a href="/join">注册</a>
+</td>
+</tr>
+</table>
+</form>

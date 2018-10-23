@@ -1,0 +1,28 @@
+﻿<style>
+div.list
+{height:500px;
+width:300px;
+padding:50px;
+overflow: scroll;
+outline-style:solid;
+outline-color:#000000;
+}
+div.diary
+{margin:50px;
+	float:left;
+}
+</style>
+<div class="diary">
+<p>日记</p>
+<p>作者:{{author}}</p>
+<textarea name=file rows=30 cols=100>
+{{content}}
+</textarea>
+</div>
+<div class="list">
+{% for i in list%}
+<ul>
+<li><a href="{%url 'public' u_id forloop.counter%}">{{i.simp_text}}</a></li>
+</ul>
+{%endfor%}
+</div>

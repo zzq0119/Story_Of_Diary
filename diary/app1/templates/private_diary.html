@@ -1,0 +1,22 @@
+﻿<style>
+div.list
+{height=100px;
+width=100px;
+}
+div.diary
+{margin:50px;
+	float:left;
+}
+</style>
+<div class="diary">
+<form action="{% url 'private_diary' u_id d_id%}" method="post">
+{% csrf_token %}
+<textarea name=file rows=30 cols=100>
+{{content}}
+</textarea><br>
+公开?<input type="checkbox" value="1" name="check_box"/>
+<p>{{mess}}</p><br>
+<input type="submit" value="保存"/> 
+<input type="submit" value="删除" name="delete"/> 
+</form>
+</div>
