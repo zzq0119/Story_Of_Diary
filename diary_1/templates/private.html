@@ -1,0 +1,55 @@
+﻿<style>
+div.list
+{height:500px;
+width:300px;
+padding:50px;
+overflow: scroll;
+outline-style:solid;
+outline-color:#000000;
+}
+div.password
+{margin:200px;
+float:left;
+}
+</style>
+<div class="password">
+<a href={{url}}>公开区</a>
+<a href={{urlset}}>个人设置</a>
+<form action="{% url 'private' u_id%}" method="post">
+{% csrf_token %}
+<p>用户名:{{username}}</p><br>
+{%if mess %}
+<p>{{mess}}</p>
+{%endif%}
+<table align="center">
+<tr>
+<td>旧密码:</td>
+<td><input type="password" name="password0" placeholder="不超过20字符"></td>
+</tr>
+<tr>
+<td>新密码:</td>
+<td><input type="password" name="password1" placeholder="不超过20字符"></td>
+</tr>
+<tr>
+<td>确认密码:</td>
+<td><input type="password" name="password2" placeholder="不超过20字符"></td>
+</tr>
+<tr>
+<td> </td>
+</tr>
+<tr align="center">
+<td colspan="2">
+<input type="submit" value="修改密码">
+</td>
+</tr>
+</table>
+</form>
+</div>
+<div class="list">
+<ul>
+<li><a href="{%url 'private_diary' u_id 0 %}">新建</a></li>
+{% for i in list%}
+<li><a href="{%url 'private_diary' u_id i.id%}">{{i.simp_text}}</a></li>
+{%endfor%}
+</ul>
+</div>
