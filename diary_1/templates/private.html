@@ -15,7 +15,7 @@ float:left;
 <div class="password">
 <a href={{url}}>公开区</a>
 <a href={{urlset}}>个人设置</a>
-<form action="{% url 'private' u_id%}" method="post">
+<form action="{% url 'private'%}" method="post">
 {% csrf_token %}
 <p>用户名:{{username}}</p><br>
 {%if mess %}
@@ -47,9 +47,9 @@ float:left;
 </div>
 <div class="list">
 <ul>
-<li><a href="{%url 'private_diary' u_id 0 %}">新建</a></li>
+<li><a href="{%url 'private_diary' 0 %}">新建</a></li>
 {% for i in list%}
-<li><a href="{%url 'private_diary' u_id i.id%}">{{i.simp_text}}</a></li>
+<li><a href="{%url 'private_diary' i.id%}">{{i.simp_text}}</a></li>
 {%endfor%}
 </ul>
 </div>
