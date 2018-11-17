@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import date
+from datetime import date,datetime
    
 class User(models.Model):
     username=models.CharField(max_length=20)
@@ -15,9 +15,18 @@ class User(models.Model):
 class Diary(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     diary_text=models.TextField()
-    simp_text=models.CharField(max_length=100)
-    pub_date = models.DateTimeField('date published')
+    simp_text=models.CharField(max_length=100,default="")
+    title=models.CharField(max_length=50,default="")
+    pub_date = models.DateTimeField(default=datetime(1970,1,1,0,0,0))
     public=models.BooleanField(default=True)
     def __str__(self):
         return self.simp_text
+       
+class Comment(models.Model):
+    diary=models.ForeignKey(Diary,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    text=models.CharField(max_length=200)
+    pub_date=models.DateTimeField(default=datetime(1970,1,1,0,0,0))
+    def __str__(self):
+        return self.text
 # Create your models here.
