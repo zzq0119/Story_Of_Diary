@@ -9,7 +9,7 @@ div.diary
 }
 </style>
 <div class="diary">
-<form action="{% url 'private_diary' u_id d_id%}" method="post">
+<form action="{% url 'private_diary' d_id%}" method="post">
 {% csrf_token %}
 <textarea name=file rows=30 cols=100>
 {{content}}

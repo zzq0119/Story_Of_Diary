@@ -21,9 +21,9 @@ from django.conf.urls import url
 import django.contrib.auth.views
 
 urlpatterns = [
-    #path(r'login/', include('login.urls')),
+    path('',include('diary_main.urls')),
     path('admin/', admin.site.urls),
-    path('diary_main/',include('diary_main.urls')),
+#    path('diary_main/',include('diary_main.urls')),
 ]
     
 '''
