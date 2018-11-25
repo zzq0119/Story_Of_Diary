@@ -31,12 +31,15 @@ def index(request):
         if _password==check_password:
             user=User(username=user_name,password=_password)
             user.save()
-            return HttpResponseRedirect('login',request)
+            return HttpResponseRedirect('signUp',request)
         else:
             return render(request,'index.html',{'error_message':'Inconsistent password.'})
     else:
         print(request.POST)
         return render(request,'index.html')
+        
+def signUp(request):
+    return render(request,'signUpSuccess.html')
 '''
 def login(request):
     if request.method=='POST':
@@ -106,7 +109,7 @@ def private_mydiary(request,d_id):
         diary_list=user_.diary_set.all()
         if d_id != 0:
             diary=get_object_or_404(Diary,id=d_id)
-    return render(request,'private_mydiary.html',{'mess':'','d_id':d_id,'content':''})
+        return render(request,'private_mydiary.html',{'mess':'','d_id':d_id,'content':''})
     else:
         return render(request,'index.html',{'error_message':'Login First.'})
 
