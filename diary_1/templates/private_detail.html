@@ -34,7 +34,7 @@ color:black;
     <div id="main">
        <div class="box boxText firstBox">
         <h3>我的信息</h3>
-        <div class="img"><img src="img/profile.jpg" width="56" alt="" /></div>
+        <div class="img"><img src="{% static 'img/profile.jpg'%}" width="56" alt="" /></div>
         <div class="self">
           <p class="last">用户名：{{u_id}}<br />
             年龄:&nbsp;{{u_setting_name}}&nbsp;岁<br />
@@ -48,7 +48,7 @@ color:black;
       <form action="" method="post" id="search">
         <fieldset>
 	<h2 style="color:black;">已登录：{{user_name}}</h2> 
-                <li><a href="http://www.baidu.cn">注销</a></li>
+                <li><a href="/private/signOut">注销</a></li>
         </fieldset>
       </form>
     </div>

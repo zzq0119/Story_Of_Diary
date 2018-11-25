@@ -17,7 +17,7 @@ def index(request):
                 request.session['username'] = login_user
                 request.session['u_id'] = u_id
                 request.session.set_expiry(300)
-                return HttpResponseRedirect(reverse('private'))
+                return HttpResponseRedirect(reverse('private',args=(1,)))
             else:
                 return render(request,'index.html',{'error_mess':'Invalid Password.'})
         except(User.DoesNotExist):
@@ -35,14 +35,14 @@ def index(request):
         else:
             return render(request,'index.html',{'error_message':'Inconsistent password.'})
     else:
-        print(request.POST)
         return render(request,'index.html')
         
 def signUp(request):
     return render(request,'signUpSuccess.html')
     
 def signOut(request):
-    request.session.flush()
+    if request.session:
+        request.session.flush()
     return render(request,'index.html')
     
 def public(request,page):
@@ -73,7 +73,7 @@ def public(request,page):
         dist['picture']=user
         return render(request,'public.html',dist)
     else:
-        return render(request,'login.html',{'error_message':'Login First.'})
+        return render(request,'index.html',{'error_message':'Login First.'})
        # 'url':reverse('public',args=(u_id,1)),,'list':diary_list
 def private(request,page):
     if 'u_id' in request.session and 'username' in request.session:
@@ -104,7 +104,7 @@ def private(request,page):
         dist['new']=reverse('private_edit_new')
         return render(request,'private.html',dist)
     else:
-        return render(request,'login.html',{'error_message':'Login First.'})       
+        return render(request,'index.html',{'error_message':'Login First.'})       
 def private_setting(request):
     if 'u_id' in request.session and 'username' in request.session:
         u_id=request.session['u_id']
@@ -123,7 +123,7 @@ def private_setting(request):
             user.save()
         return render(request, 'private_setting.html', content)
     else:
-        return render(request,'login.html',{'error_message':'Login First.'})
+        return render(request,'index.html',{'error_message':'Login First.'})
 def public_detail(request,d_id):
     diary=Diary.objects.get(id=d_id)
     dist={'back':reverse('public',args=(1,)),'title':diary.title,'text':diary.diary_text,'author':diary.user.username}
