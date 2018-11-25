@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date,datetime
+import django.utils.timezone as timezone
    
 class User(models.Model):
     username=models.CharField(max_length=20)
@@ -15,10 +16,10 @@ class User(models.Model):
 class Diary(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     diary_text=models.TextField()
-    simp_text=models.CharField(max_length=100,default="")
-    title=models.CharField(max_length=50,default="")
-    pub_date = models.DateTimeField(default=datetime(1970,1,1,0,0,0))
-    public=models.BooleanField(default=True)
+    simp_text=models.CharField(max_length=100)
+    pub_date = models.DateTimeField('date published')
+    title=models.CharField(max_length=50)
+    public=models.BooleanField(default=False)
     def __str__(self):
         return self.simp_text
        
@@ -30,3 +31,4 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 # Create your models here.
+        

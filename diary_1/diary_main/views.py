@@ -41,97 +41,134 @@ def index(request):
 def signUp(request):
     return render(request,'signUpSuccess.html')
     
-def private(request):
+def signOut(request):
+    request.session.flush()
+    return render(request,'index.html')
+    
+def public(request,page):
     if 'u_id' in request.session and 'username' in request.session:
         user_name=request.session['username']
         u_id=request.session['u_id']
-        
-        return render(request,'private.html',{'urlset':reverse('private_setting'),'username':user_name})
+        diary_list=Diary.objects.filter(public=True)
+        user=User.objects.get(id=u_id)
+        length=len(diary_list)#日记总条数
+        max_page=(length-1)/6+1
+        diary_list=diary_list[page*6-6:page*6]
+        dist={}
+        if page>1 and page<max_page:
+            dist['last']=reverse('public',args=(page-1,))
+            dist['next']=reverse('public',args=(page+1,))
+        if page==max_page and max_page>1:
+            dist['last']=reverse('public',args=(page-1,))
+        if page==1 and max_page>1:
+            dist['next']=reverse('public',args=(page+1,))
+        for i in range(len(diary_list)):
+            dist['diary'+str(i+1)]=diary_list[i]
+            dist['url'+str(i+1)]=reverse('public_detail',args=(diary_list[i].id,))
+        dist['user']=user_name
+        dist['age']=datetime.datetime.today().year-User.objects.get(id=u_id).birthday.year
+        dist['public']=reverse('public',args=(1,))
+        dist['private']=reverse('private',args=(1,))
+        dist['setting']=reverse('private_setting')
+        dist['picture']=user
+        return render(request,'public.html',dist)
     else:
-        return render(request,'index.html',{'error_message':'Login First.'})
-       
-def private_mydiary(request,d_id):
+        return render(request,'login.html',{'error_message':'Login First.'})
+       # 'url':reverse('public',args=(u_id,1)),,'list':diary_list
+def private(request,page):
     if 'u_id' in request.session and 'username' in request.session:
+        user_name=request.session['username']
         u_id=request.session['u_id']
-        user_=get_object_or_404(User,id=u_id)
-        diary_list=user_.diary_set.all()
-        if d_id != 0:
-            diary=get_object_or_404(Diary,id=d_id)
-        return render(request,'private_mydiary.html',{'mess':'','d_id':d_id,'content':''})
+        user=get_object_or_404(User,id=u_id)
+        diary_list=user.diary_set.all()
+        length=len(diary_list)
+        max_page=(length-1)/6+1
+        diary_list=diary_list[page*6-6:page*6]
+        dist={}
+        if page>1 and page<max_page:
+            dist['last']=reverse('private',args=(page-1,))
+            dist['next']=reverse('private',args=(page+1,))
+        if page==max_page and max_page>1:
+            dist['last']=reverse('private',args=(page-1,))
+        if page==1 and max_page>1:
+            dist['next']=reverse('private',args=(page+1,))
+        for i in range(len(diary_list)):
+            dist['diary'+str(i+1)]=diary_list[i]
+            dist['url'+str(i+1)]=reverse('private_detail',args=(diary_list[i].id,))
+        dist['user']=user_name
+        dist['age']=datetime.datetime.today().year-User.objects.get(id=u_id).birthday.year
+        dist['public']=reverse('public',args=(1,))
+        dist['private']=reverse('private',args=(1,))
+        dist['setting']=reverse('private_setting')
+        dist['picture']=user
+        dist['new']=reverse('private_edit_new')
+        return render(request,'private.html',dist)
     else:
-        return render(request,'index.html',{'error_message':'Login First.'})
-
-
-
-    
-def private_diary(request,d_id):
-    if 'u_id' in request.session and 'username' in request.session:
-        u_id=request.session['u_id']
-        user_=get_object_or_404(User,id=u_id)
-        diary_list=user_.diary_set.all()
-        if d_id != 0:   #查看修改删除
-            diary=get_object_or_404(Diary,id=d_id)
-            mess='private'
-            if diary.public:
-                mess='public'
-            if request.method=='POST':
-                if 'delete' in request.POST:
-                    diary.delete()
-                    return HttpResponseRedirect(reverse('private'))
-                mess='private'
-                if request.POST.get('check_box')=="1":
-                    diary.public=True
-                    mess='public'
-                diary.diary_text=request.POST.get('file')
-                diary.simp_text=diary.diary_text[:17]+'...'
-                diary.save()
-                return render(request,'private_diary.html',{'mess':mess,'d_id':d_id,'content':diary.diary_text})
-            return render(request,'private_diary.html',{'mess':mess,'d_id':d_id,'content':diary.diary_text})
-        else:   #新建
-            if request.method=='POST' :
-                diary=Diary(user=user_,diary_text=request.POST.get('file'),simp_text=request.POST.get('file')[:17]+'...',public=False)
-                mess='private'
-                if request.POST.get('check_box')=="1":
-                    diary.public=True
-                    mess='public'
-                diary.pub_date=datetime.datetime.today()
-                diary.save()
-                return HttpResponseRedirect(reverse('private'))
-            return render(request,'private_diary.html',{'mess':'','d_id':d_id,'content':''})
-    else:
-        return render(request,'index.html',{'error_message':'Login First.'})        
+        return render(request,'login.html',{'error_message':'Login First.'})       
 def private_setting(request):
     if 'u_id' in request.session and 'username' in request.session:
         u_id=request.session['u_id']
         user=User.objects.get(id=u_id)
-        content={'back':reverse('private'),'img':user,'name':user.realname,'sex':'女','date':user.birthday,'phone':user.telephone}
+        content={'back':reverse('private',args=(1,)),'img':user,'name':user.realname,'sex':'女','date':user.birthday,'phone':user.telephone}
         if user.sex:
-            content={'back':reverse('private'),'img':user,'name':user.realname,'sex':'男','date':user.birthday,'phone':user.telephone}
+            content={'back':reverse('private',args=(1,)),'img':user,'name':user.realname,'sex':'男','date':user.birthday,'phone':user.telephone}
         if request.method=="POST":
             if request.FILES.get("img"):
                 user.img=request.FILES.get("img")
             user.realname=request.POST.get("realname")
-            content = {'back':reverse('private'),'img':user,'name':user.realname,'sex':request.POST.get("sex"),'date':user.birthday,'phone':user.telephone}
+            content = {'back':reverse('private',args=(1,)),'img':user,'name':user.realname,'sex':request.POST.get("sex"),'date':user.birthday,'phone':user.telephone}
             if request.POST.get("year") and request.POST.get("month") and request.POST.get("day"):
                 user.birthday=date(int(request.POST.get("year")),int(request.POST.get("month")),int(request.POST.get("day")))
             user.telephone=request.POST.get("telephone")
             user.save()
         return render(request, 'private_setting.html', content)
     else:
-        return render(request,'index.html',{'error_message':'Login First.'})
-def public(request,d_id):
-    if 'u_id' in request.session and 'username' in request.session:
-        diary_list=Diary.objects.filter(public=True)
-        if len(diary_list)!=0:
-            diary=diary_list[d_id-1]
-            return render(request,'public.html',{'author':diary.user.username,'u_id':u_id,'list':diary_list,'content':diary.diary_text})
+        return render(request,'login.html',{'error_message':'Login First.'})
+def public_detail(request,d_id):
+    diary=Diary.objects.get(id=d_id)
+    dist={'back':reverse('public',args=(1,)),'title':diary.title,'text':diary.diary_text,'author':diary.user.username}
+    return render(request,'public_detail.html',dist)
+def private_detail(request,d_id):
+    diary=Diary.objects.get(id=d_id)
+    dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,))}
+    return render(request,'private_detail.html',dist)
+def private_edit(request,d_id):
+    diary=get_object_or_404(Diary,id=d_id)
+    mess='私有'
+    if diary.public:
+        mess='公开'
+    if request.method=='POST':
+        if 'delete' in request.POST:
+            diary.delete()
+            return HttpResponseRedirect(reverse('private',args=(1,)))
+        if request.POST.get('check_box')=="1":
+            diary.public=True
         else:
-            return render(request,'public.html',{'author':"无",'u_id':u_id,'list':diary_list,'content':"无"})
-    else:
-        return render(request,'index.html',{'error_message':'Login First.'})
+            diary.public=False
+        diary.title=request.POST.get('file1')
+        diary.diary_text=request.POST.get('file')
+        diary.simp_text=diary.diary_text[:100]+'...'
+        diary.pub_date=datetime.datetime.today()
+        diary.save()
+        dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,))}
+        return render(request,'private_detail.html',dist)
+    return render(request,'private_edit.html',{'d_id':d_id,'diary_title':diary.title,'content':diary.diary_text,'mess':mess,'url':reverse('private_detail',args=(d_id,))})
+def private_edit_new(request):
+    if 'u_id' in request.session and 'username' in request.session:
+        user_name=request.session['username']
+        u_id=request.session['u_id']
+        user=User.objects.get(id=u_id)
+        if request.method=='POST' :
+            diary=Diary(user=user,title=request.POST.get('file1'),diary_text=request.POST.get('file'),simp_text=request.POST.get('file')[:100]+'...',public=False)
+            mess='private'
+            diary.pub_date=datetime.datetime.today()
+            if request.POST.get('check_box')=="1":
+                diary.public=True
+                mess='public'
+            diary.save()
+            dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,))}
+            return render(request,'private_detail.html',dist)
+        return render(request,'private_edit_new.html',{'url':reverse('private',args=(1,))})
         
-def signOut(request):
-    request.session.flush()
-    return render(request,'index.html')
         
 
