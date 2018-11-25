@@ -1,6 +1,5 @@
-﻿<!DOCTYPE html>
-{% load static %}
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="autor" content="Breezy New Media (info@breezy.cz)" />
@@ -8,8 +7,8 @@
 <meta name="description" content=""  />
 <meta name="keywords" content="" />
 <title>DeepBlue - by www.865171.cn</title>
-<link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" media="screen" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print" />
+<link rel="stylesheet" type="text/css" href="./css/default.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="./css/print.css" media="print" />
 <style>
 textarea {
 color:black;
@@ -35,10 +34,10 @@ color:black;
         <h3>我的信息</h3>
         <div class="img"><img src="{% static 'img/profile.jpg'%}" width="56" alt="" /></div>
         <div class="self">
-          <p class="last">用户名：{{u_id}}<br />
-            年龄:&nbsp;{{u_setting_name}}&nbsp;岁<br />
-            性别:{{u_setting_gender}}<br />
-            email:&nbsp;<a href="http://www.baidu.cn">email@email.com</a></p>
+          <p class="last">用户名：{{realname}}<br />
+            年龄:&nbsp;{{age}}&nbsp;岁<br />
+            性别:{{sex}}<br />
+            email:&nbsp;{{email}}</p>
         </div>
     </div>
     <p class="info"><font size="5">'</font></p> 
@@ -102,7 +101,7 @@ color:black;
         <li><font size="4">目录:</font></li>
 	{% for i in list%}
 	<ul>
-	<li><a href="{%url 'public' u_id forloop.counter%}">{{i.simp_text}}</a></li>
+	<li><a href="{%url 'private_detail' i.id %}">{{i.title}}</a></li>
 	</ul>
 	{%endfor%}
     </div>

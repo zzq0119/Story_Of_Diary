@@ -65,7 +65,7 @@ def public(request,page):
         diary_list=Diary.objects.filter(public=True)
         user=User.objects.get(id=u_id)
         length=len(diary_list)#日记总条数
-        max_page=(length-1)/6+1
+        max_page=int((length-1)/6)+1
         diary_list=diary_list[page*6-6:page*6]
         dist={}
         if page>1 and page<max_page:
@@ -78,7 +78,7 @@ def public(request,page):
         for i in range(len(diary_list)):
             dist['diary'+str(i+1)]=diary_list[i]
             dist['url'+str(i+1)]=reverse('public_detail',args=(diary_list[i].id,))
-        dist['user']=user_name
+        dist['user']=user.realname
         dist['age']=datetime.datetime.today().year-User.objects.get(id=u_id).birthday.year
         dist['public']=reverse('public',args=(1,))
         dist['private']=reverse('private',args=(1,))
@@ -87,7 +87,7 @@ def public(request,page):
         return render(request,'public.html',dist)
     else:
         return render(request,'index.html',{'error_message':'Login First.'})
-       # 'url':reverse('public',args=(u_id,1)),,'list':diary_list
+
 def private(request,page):
     if 'u_id' in request.session and 'username' in request.session:
         user_name=request.session['username']
@@ -95,7 +95,7 @@ def private(request,page):
         user=get_object_or_404(User,id=u_id)
         diary_list=user.diary_set.all()
         length=len(diary_list)
-        max_page=(length-1)/6+1
+        max_page=int((length-1)/6)+1
         diary_list=diary_list[page*6-6:page*6]
         dist={}
         if page>1 and page<max_page:
@@ -108,7 +108,7 @@ def private(request,page):
         for i in range(len(diary_list)):
             dist['diary'+str(i+1)]=diary_list[i]
             dist['url'+str(i+1)]=reverse('private_detail',args=(diary_list[i].id,))
-        dist['user']=user_name
+        dist['user']=user.realname
         dist['age']=datetime.datetime.today().year-User.objects.get(id=u_id).birthday.year
         dist['public']=reverse('public',args=(1,))
         dist['private']=reverse('private',args=(1,))
@@ -127,25 +127,53 @@ def private_setting(request):
             content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':'男','date':user.birthday,'phone':user.telephone}
         if request.method=="POST":
             if request.FILES.get("img"):
-               # image=
                 user.img=request.FILES.get("img")
-            user.realname=request.POST.get("realname")
-            content = {'back':reverse('private',args=(1,)),'img':user,'name':user.realname,'sex':request.POST.get("sex"),'date':user.birthday,'phone':user.telephone}
+            if request.POST.get("realname"):
+                user.realname=request.POST.get("realname")
+            content = {'back':reverse('private',args=(1,)),'img':user}
+            if request.POST.get("sex"):
+                if request.POST.get("sex")=="0":
+                    user.sex="女"
+                else:
+                    user.sex="男"
             if request.POST.get("year") and request.POST.get("month") and request.POST.get("day"):
                 user.birthday=date(int(request.POST.get("year")),int(request.POST.get("month")),int(request.POST.get("day")))
-            user.telephone=request.POST.get("telephone")
+            if request.POST.get("telephone"):
+                user.telephone=request.POST.get("telephone")
+            if request.POST.get("mailbox"):
+                user.email=request.POST.get("mailbox")
+            if request.POST.get('q1')==user.password and request.POST.get('q2'):
+                user.password=request.POST.get('q2')
             user.save()
         return render(request, 'private_setting.html', content)
     else:
         return render(request,'index.html',{'error_message':'Login First.'})
 def public_detail(request,d_id):
-    diary=Diary.objects.get(id=d_id)
-    dist={'back':reverse('public',args=(1,)),'title':diary.title,'text':diary.diary_text,'author':diary.user.username}
-    return render(request,'public_detail.html',dist)
+    if 'u_id' in request.session and 'username' in request.session:
+        u_id=request.session['u_id']
+        user=User.objects.get(id=u_id)
+        diary=Diary.objects.get(id=d_id)
+        diary_list=Diary.objects.filter(public=True)
+        dist={'back':reverse('public',args=(1,)),'list':diary_list,'pub_date':diary.pub_date,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,
+              'user_name':user.username,'title':diary.title,'text':diary.diary_text,'author':diary.user.username,'email':user.email}
+        if user.sex=="男":
+            dist['sex']="男"
+        if user.sex=="女":
+            dist['sex']="女"
+        return render(request,'public_detail.html',dist)
 def private_detail(request,d_id):
-    diary=Diary.objects.get(id=d_id)
-    dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,))}
-    return render(request,'private_detail.html',dist)
+    if 'u_id' in request.session and 'username' in request.session:
+        u_id=request.session['u_id']
+        user=User.objects.get(id=u_id)
+        diary=Diary.objects.get(id=d_id)
+        diary_list=user.diary_set.all()
+        dist={'back':reverse('private',args=(1,)),'list':diary_list,'pub_date':diary.pub_date,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,
+              'user_name':user.username,'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,)),'email':user.email}
+        if user.sex=="男":
+            dist['sex']="男"
+        if user.sex=="女":
+            dist['sex']="女"
+        return render(request,'private_detail.html',dist)
 def private_edit(request,d_id):
     diary=get_object_or_404(Diary,id=d_id)
     mess='私有'
@@ -183,6 +211,3 @@ def private_edit_new(request):
             dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,))}
             return render(request,'private_detail.html',dist)
         return render(request,'private_edit_new.html',{'url':reverse('private',args=(1,))})
-        
-        
-
