@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>网站登录</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'content/site.css' %}" />
+    <script src="{% static 'scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+<body>
+<h1>Login</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'login' %}" method="post">
+{% csrf_token %}
+<div style = "max-width:470px;">
+    <center> 
+        <input type = "text" style = "margin-left:20%;" 
+            placeholder = "Identifiant" name = "username" />
+    </center>
+</div>
+			
+    <br>
+         
+<div style = "max-width:470px;">
+    <center>
+        <input type = "password" style = "margin-left:20%;" 
+            placeholder = "password" name = "password" />
+    </center>
+</div>
+<input type="submit" value="确定">
+<a href="/diary_main/signIn">注册</a>
+</form>
+</body>
+</html>

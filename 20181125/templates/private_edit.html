@@ -1,0 +1,22 @@
+﻿<style>
+div.diary
+{margin:50px;
+	float:left;
+}
+</style>
+<a href={{url}}>返回</a>
+<div class="diary">
+<form action="{% url 'private_edit' d_id%}" method="post">
+{% csrf_token %}
+<textarea name=file1 rows=1 cols=100>
+{{diary_title}}
+</textarea><br>
+<textarea name=file rows=30 cols=100>
+{{content}}
+</textarea><br>
+公开?<input type="checkbox" value="1" name="check_box"/>
+<p>{{mess}}</p><br>
+<input type="submit" value="保存"/> 
+<input type="submit" value="删除" name="delete"/> 
+</form>
+</div>
