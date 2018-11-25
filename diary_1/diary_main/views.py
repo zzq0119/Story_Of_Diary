@@ -174,6 +174,8 @@ def private_detail(request,d_id):
         if user.sex=="女":
             dist['sex']="女"
         return render(request,'private_detail.html',dist)
+    else:
+        return redirect('/')
 def private_edit(request,d_id):
     diary=get_object_or_404(Diary,id=d_id)
     mess='私有'
@@ -211,3 +213,5 @@ def private_edit_new(request):
             dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,))}
             return render(request,'private_detail.html',dist)
         return render(request,'private_edit_new.html',{'url':reverse('private',args=(1,))})
+    else:
+        return redirect('/')
