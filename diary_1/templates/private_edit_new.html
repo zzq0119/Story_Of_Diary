@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>   
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html" />
+<meta name="autor" content="软工小组" />
+<meta name="description" content=""  />
+<meta name="keywords" content="" />
+<title>Story of diary</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print" />
+<script src="{% static 'datePlugin.js' %}"></script>
+</head>
+<body>
+<div id="view">
+  <!-- #header (main heading + logo with slogan) -->
+  <div id="head">
+    <!-- main headings with search component -->
+    <div id="main">
+      <h1>日记故事</a></h1>
+      <h2>test version</a></h2>
+      <form action="" method="post" id="search">
+        <fieldset>
+            <h2>已登录：{{user_name}}</h2> 
+            <h2><a href=" ">注销  <a></h2>
+        </fieldset>
+      </form>
+    </div>
+    <!-- /main headings with search component -->
+    <hr class="hidden" />
+    <!-- main horizontal menu -->
+    <div id="mainMenu">
+      <ul>
+        <li><a href="http://www.baidu.com">日记社区<span></span></a></li>
+        <li class="active"><a href="#content">个人主页<span></span></a></li>
+        <!--li class="fr"><a href="http://www.baidu.com">关于<span></span></a></li-->
+        <!--li class="fr"><a href="http://www.baidu.com">获取帮助<span></span></a></li-->
+        <li class="fr"><a href='private/setting/'>设置<span></span></a></li>
+      </ul>
+    </div>
+    <!-- /main horizontal menu -->
+    <hr class="hidden" />
+    <!-- logo with slogan -->
+    <!-- /logo with slogan -->
+    <hr class="hidden" />
+  </div>
+  <!-- /#header (main heading + logo with slogan) -->
+  <!-- #main content construct -->
+  <div id="content">
+    <!-- #left part of web - main content -->
+    <div id="contentBlock">
+      <!-- #cols 50:50 -->
+	  <a href={{url}}>返回</a>
+      <form action="{% url 'private_edit_new'%}" method="post">
+{% csrf_token %}
+<textarea name=file1 rows=1 cols=100 placeholder="标题">
+</textarea><br>
+<textarea name=file rows=30 cols=100 placeholder="正文">
+</textarea><br>
+公开?<input type="checkbox" value="1" name="check_box"/>
+<input type="submit" value="保存"/> 
+</form>
+      </ul>
+      <div class="col2">
+        </a> </div>
+      <!-- /#cols 50:50 -->
+    </div>
+    <!-- /#left part of web - main content -->
+    <hr class="hidden" />
+    <!-- #right part of web - submenu boxes with simple text -->
+    <div id="menuBlock">
+      <div class="box boxText firstBox">
+        <h3>个人信息</h3>
+        <div class="img"><img src="images/timg.jpg" width="56" alt="" /></div>
+        <div class="self">
+          <p class="last">用户名：<br />
+            年龄:&nbsp;18&nbsp;岁<br />
+        </div>
+      </div>
+      <div class="box subMenu">
+        <h3>个人设置:</h3>
+        <ul>
+          <li><a href="http://www.baidu.com">个人简介</a></li>
+          <li><a href="http://www.baidu.com">照片</a></li>
+          <li><a href="http://www.baidu.com">联系</a></li>
+        </ul>
+      </div>
+      <div class="box subMenu">
+            <h3>查看:</h3>
+            <ul>
+               <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text">
+            </ul>
+      </div>    
+    </div>
+    <!-- /#right part of web -->
+  </div>
+  <!-- /#main content construct -->
+  <!-- #accessible components - do not delete this !!! -->
+  <hr class="hidden" />
+  <ul class="hidden">
+    <li><a href="#view">On top</a></li>
+    <li><a href="#content">Back to content</a></li>
+  </ul>
+  <hr class="hidden" />
+  <!-- /#accessible components -->
+  <!-- #footer -->
+  <div id="foot">
+    <p class="fl">&copy; all rights reserved</p>
+    <!-- /#   LINKS AND AUTHOR-SIGNATURE CANNOT BE REMOVED !!! -->
+    <p class="fr">created by&nbsp;<a class="ico ico-breezy">软工小组</a></p>
+  </div>
+  <!-- /#footer -->
+</div>
+</body>
+</html>
