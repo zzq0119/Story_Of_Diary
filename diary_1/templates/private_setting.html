@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-{% load static %}
 <body  background="images\bg6.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%;background-attachment:fixed " >
+
 
 <form method="POST" enctype="multipart/form-data" style="height : 500px; width:500px;margin: auto;">
 
@@ -18,9 +17,9 @@
 <input type="text" name="realname" placeholder="昵称(最大长度12)" Maxlength="12";style="border-radius:10px;" >
 <hr>
 修改密码：<br>
-<input type="password" autocomplete="off" placeholder="旧密码">
+<input type="password" autocomplete="off" placeholder="旧密码" name="q1">
 <br>
-<input type="password" autocomplete="off" placeholder="新密码">
+<input type="password" autocomplete="off" placeholder="新密码" name="q2">
 
 <hr>
 性别：
@@ -38,7 +37,7 @@
 电话：
 <input type="text" name="telephone" placeholder="电话号码">
 <hr>邮箱：
-<input type="text" name="telephone" placeholder="邮箱">
+<input type="text" name="mailbox" placeholder="邮箱">
 
 <br><br>
 <button type="submit">保存</button>
