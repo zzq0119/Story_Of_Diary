@@ -95,6 +95,24 @@ def private(request):
     else:
         return render(request,'index.html',{'error_message':'Login First.'})
        # 'url':reverse('public',args=(u_id,1)),,'list':diary_list
+
+
+
+       
+def private_mydiary(request,d_id):
+    if 'u_id' in request.session and 'username' in request.session:
+        u_id=request.session['u_id']
+        user_=get_object_or_404(User,id=u_id)
+        diary_list=user_.diary_set.all()
+        if d_id != 0:
+            diary=get_object_or_404(Diary,id=d_id)
+    return render(request,'private_mydiary.html',{'mess':'','d_id':d_id,'content':''})
+    else:
+        return render(request,'index.html',{'error_message':'Login First.'})
+
+
+
+    
 def private_diary(request,d_id):
     if 'u_id' in request.session and 'username' in request.session:
         u_id=request.session['u_id']
