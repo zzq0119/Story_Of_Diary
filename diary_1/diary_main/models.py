@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+import django.utils.timezone as timezone
    
 class User(models.Model):
     username=models.CharField(max_length=20)
@@ -7,7 +8,7 @@ class User(models.Model):
     img = models.ImageField(upload_to='img',default="img/picture.jpg")
     realname=models.CharField(max_length=20,default="")
     sex=models.CharField(max_length=2,default="")
-    birthday=models.DateField(default=date(1970,1,1))
+    birthday=models.DateField(default = timezone.now)
     telephone=models.CharField(max_length=11,default="")
     def __str__(self):
         return self.username
@@ -17,7 +18,8 @@ class Diary(models.Model):
     diary_text=models.TextField()
     simp_text=models.CharField(max_length=100)
     pub_date = models.DateTimeField('date published')
-    public=models.BooleanField(default=True)
+    title=models.CharField(max_length=50)
+    public=models.BooleanField(default=False)
     def __str__(self):
         return self.simp_text
 # Create your models here.
