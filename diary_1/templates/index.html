@@ -2,16 +2,17 @@
 <html >
 <head>
 <meta charset="UTF-8">
+<title>Story of diary</title>
 
 
 <link rel="stylesheet" href="css/style.css">
 
-<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+<link href="css/2.css" rel="stylesheet">
+<link rel='stylesheet prefetch' href="css/1.css">
 
 </head>
 <body>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
 
 <div class="cotn_principal">
   <div class="cont_centrar">
@@ -53,7 +54,6 @@
             {% csrf_token %}  
             <div class="cont_form_sign_up"> <a href="#" onClick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
               <h2>注册</h2>
-              <input type="text" placeholder="邮箱" />
               <input type="text" placeholder="用户名" name = "username"/>
               <input type="password" placeholder="密码" name = "password"/>
               <input type="password" placeholder="确认密码" name = "check_password"/>
@@ -64,14 +64,14 @@
     </div>
 	
   </div>
-  
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
   <div class="cont_centrar">
   <div class="cont_ba_opcitiy"> 
 			
-           <p>Happy？</p>
-			 <p>Sad？</p>
+           
 			
-			<h3>分享你的心情</h3>
+			<h3>Story of Diray</h3>
+			<h5>分享你的心情</h5>
 			</div>
 			</div>
 			
@@ -79,12 +79,7 @@
 
 <script src="js/index.js"></script>
 
-<script>
-document.getElementById("cambiar_login()").onload=cambiar_login();
-function test(){
-   alert(11); 
- }
-</script>
+
 
 </body>
 </html>
