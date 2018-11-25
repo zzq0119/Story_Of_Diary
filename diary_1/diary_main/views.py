@@ -1,10 +1,10 @@
-from django.shortcuts import get_object_or_404,render
-from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404,render,redirect
+from django.http import HttpResponseRedirect,HttpResponseForbidden
 from django.urls import reverse
 from .models import Diary,User
 from datetime import date
 from django.template import loader,RequestContext
-import datetime
+import datetime,re
 
 def index(request):
     if request.method=='POST' and 'check_password' not in request.POST:
@@ -31,7 +31,7 @@ def index(request):
         if _password==check_password:
             user=User(username=user_name,password=_password)
             user.save()
-            return HttpResponseRedirect('signUp',request)
+            return redirect('signUp')
         else:
             return render(request,'index.html',{'error_message':'Inconsistent password.'})
     else:
@@ -43,8 +43,21 @@ def signUp(request):
 def signOut(request):
     if request.session:
         request.session.flush()
-    return render(request,'index.html')
-    
+    return redirect('/')
+"""
+def uploadIcon(request):
+    if request.method=='POST' and 'u_id' in request.session:
+        img_file=request.FILES.get("image")
+        if img_file:
+            u_id=request.session['u_id']
+            user=User.objects.get(id=u_id)
+            img_path='/media/images/'+str(u_id)+
+            user.img.
+        else:
+            return redirect('/')
+    else:
+        return HttpResponseForbidden('403')
+ """   
 def public(request,page):
     if 'u_id' in request.session and 'username' in request.session:
         user_name=request.session['username']
@@ -109,11 +122,12 @@ def private_setting(request):
     if 'u_id' in request.session and 'username' in request.session:
         u_id=request.session['u_id']
         user=User.objects.get(id=u_id)
-        content={'back':reverse('private',args=(1,)),'img':user,'name':user.realname,'sex':'女','date':user.birthday,'phone':user.telephone}
+        content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':'女','date':user.birthday,'phone':user.telephone}
         if user.sex:
-            content={'back':reverse('private',args=(1,)),'img':user,'name':user.realname,'sex':'男','date':user.birthday,'phone':user.telephone}
+            content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':'男','date':user.birthday,'phone':user.telephone}
         if request.method=="POST":
             if request.FILES.get("img"):
+               # image=
                 user.img=request.FILES.get("img")
             user.realname=request.POST.get("realname")
             content = {'back':reverse('private',args=(1,)),'img':user,'name':user.realname,'sex':request.POST.get("sex"),'date':user.birthday,'phone':user.telephone}

@@ -249,7 +249,30 @@ cursor: pointer;
 .cont_forms_active_sign_up {
 z-index: 2;  
 }
+.cont_form_sign_up > input[type="submit"] {
+text-align: center;
+  padding: 15px 5px;
+margin-left: 10px;
+margin-top: 20px;
+  width: 130px;
+border-radius:3px;
+border:none;
 
+    color: #FFFFFF;
+    background-color:#f44336;
+}
+
+.cont_form_login > input[type="submit"] {
+  padding: 15px 5px;
+margin-left: 10px;
+margin-top: 20px;
+  width: 130px;
+border-radius:3px;
+border:none;
+text-align: center;
+  color: #FFFFFF;
+  background-color:#FF9800;
+}
 
 @-webkit-keyframes animar_fondo {
   from { -webkit-transform: scale(1) translate(0px);
