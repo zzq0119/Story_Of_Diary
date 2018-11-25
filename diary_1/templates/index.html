@@ -41,7 +41,7 @@
         <div class="cont_img_back_grey"> <img src="po.jpg" alt="" /> </div>
       </div>
       <div class="cont_forms" >
-        <div class="cont_img_back_"> <img src="po.jpg" alt="" /> </div>
+        <div class="cont_img_back_"> <img src="{% static 'po.jpg'%}" alt="" /> </div>
         <form action="{% url 'index' %}" method="post" >
             {% csrf_token %}          
             <div class="cont_form_login"> <a href="#" onClick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
@@ -78,7 +78,7 @@
 			
 </div>
 
-<script src="js/index.js"></script>
+<script src="{% static 'js/index.js' %}"></script>
 
 
 
