@@ -5,11 +5,12 @@ import django.utils.timezone as timezone
 class User(models.Model):
     username=models.CharField(max_length=20)
     password=models.CharField(max_length=20)
-    img = models.ImageField(upload_to='img',default="img/picture.jpg")
+    img = models.FileField(upload_to='media/images',default="/media/images/picture.jpg")
     realname=models.CharField(max_length=20,default="")
     sex=models.CharField(max_length=2,default="")
     birthday=models.DateField(default=date(1970,1,1))
     telephone=models.CharField(max_length=11,default="")
+    email=models.CharField(max_length=30,default="")
     def __str__(self):
         return self.username
         
