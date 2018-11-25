@@ -10,6 +10,7 @@ class User(models.Model):
     sex=models.CharField(max_length=2,default="")
     birthday=models.DateField(default=date(1970,1,1))
     telephone=models.CharField(max_length=11,default="")
+    email=models.CharField(max_length=30,default="")
     def __str__(self):
         return self.username
         
