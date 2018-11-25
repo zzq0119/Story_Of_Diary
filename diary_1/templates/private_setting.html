@@ -1,0 +1,13 @@
+﻿<img src='{{ img.img.url }}' height="100" width="80"/>
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<input type="file" name="img"><br>
+真实姓名：<input type="text" name="realname" placeholder="{{name}}"><p>{{name}}</p><br>
+性别：<input type="radio" name="sex" value="1">男
+<input type="radio" name="sex" value="0">女<p>{{sex}}</p><br>
+生日：<input type="text" name="year">年
+<input type="text" name="month">月
+<input type="text" name="day">日<p>{{date}}</p><br>
+电话：<input type="text" name="telephone" placeholder="{{phone}}"><p>{{phone}}</p><br>
+<button type="submit">保存</button><a href={{back}}>返回<a><br>
+</form>
