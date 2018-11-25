@@ -31,73 +31,24 @@ def index(request):
         if _password==check_password:
             user=User(username=user_name,password=_password)
             user.save()
-            return HttpResponseRedirect('login',request)
+            return HttpResponseRedirect('signUp',request)
         else:
             return render(request,'index.html',{'error_message':'Inconsistent password.'})
     else:
         print(request.POST)
         return render(request,'index.html')
-'''
-def login(request):
-    if request.method=='POST':
-        login_user=request.POST.get('username')
-        login_password=request.POST.get('password')
-        try:
-            user=User.objects.get(username=login_user)
-            if user.password==login_password:
-                u_id=user.id
-
-                request.session['username'] = login_user
-                request.session['u_id'] = u_id
-                request.session.set_expiry(300)
-                return HttpResponseRedirect(reverse('private'))
-                
-            else:
-                return render(request,'index.html',{'error_message':'Invalid Password.'})
-        except(User.DoesNotExist):
-            return render(request,'index.html',{'error_message':'User does not exist.'})
-    else:
-#        return render(request,'index.html')
-        return render(request,'index.html')
         
-def signIn(request):        #注册
-    if request.method=='POST':
-        user_name=request.POST.get('username')
-        if User.objects.filter(username=user_name):
-            return render(request,'signIn.html',{'error_message':'Username has been used.'})
-        _password=request.POST.get('password')
-        check_password=request.POST.get('check_password')
-        if _password==check_password:
-            user=User(username=user_name,password=_password)
-            user.save()
-            return HttpResponseRedirect('index',request)
-        else:
-            return render(request,'signIn.html',{'error_message':'Inconsistent password.'})
-    else:
- #       return render(request,'signIn.html')
-        return render(request,'index.html')
-'''
+def signUp(request):
+    return render(request,'signUpSuccess.html')
+    
 def private(request):
     if 'u_id' in request.session and 'username' in request.session:
         user_name=request.session['username']
         u_id=request.session['u_id']
-        #diary_list=user.diary_set.all()
-        '''
-        if request.method=='POST':
-            if request.POST.get('password0')==user.password and request.POST.get('password1')==request.POST.get('password2'):
-                user.password=request.POST.get('password1')
-                user.save()
-                return render(request,'private.html',{'url':reverse('public',args=(u_id,1)),'urlset':reverse('private_setting'),'mess':"修改成功",'username':user_name})
-            else:
-                return render(request,'private.html',{'url':reverse('public',args=(u_id,1)),'urlset':reverse('private_setting'),'mess':"密码错误",'username':user_name})
-        '''
+        
         return render(request,'private.html',{'urlset':reverse('private_setting'),'username':user_name})
     else:
         return render(request,'index.html',{'error_message':'Login First.'})
-       # 'url':reverse('public',args=(u_id,1)),,'list':diary_list
-
-
-
        
 def private_mydiary(request,d_id):
     if 'u_id' in request.session and 'username' in request.session:
@@ -106,7 +57,7 @@ def private_mydiary(request,d_id):
         diary_list=user_.diary_set.all()
         if d_id != 0:
             diary=get_object_or_404(Diary,id=d_id)
-    return render(request,'private_mydiary.html',{'mess':'','d_id':d_id,'content':''})
+        return render(request,'private_mydiary.html',{'mess':'','d_id':d_id,'content':''})
     else:
         return render(request,'index.html',{'error_message':'Login First.'})
 
