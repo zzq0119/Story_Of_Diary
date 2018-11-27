@@ -10,6 +10,7 @@
 <title>Story of diary</title>
 <link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" media="screen" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print" />
+<script src="{% static 'js/datePlugin.js' %}"></script>
 </head>
 <body>
 <div id="view">
@@ -97,7 +98,9 @@
 	  {%if next%}
 	  <a href={{next}}>下一页</a>
 	  {%endif%}
+        </div>
     </div>
+    
     <!-- /#left part of web - main content -->
     <hr class="hidden" />
     <!-- #right part of web - submenu boxes with simple text -->
