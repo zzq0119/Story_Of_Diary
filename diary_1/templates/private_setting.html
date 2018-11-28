@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+<title>private_setting</title>
+<meta charset="UTF-8">
+</head>
+
+<body  background="{% static 'images/bg.jpg'%}" style=" background-repeat:no-repeat ;background-size:100% 100%;background-attachment:fixed " >
+
+<form name="reg_testdate"method="POST" enctype="multipart/form-data" style="height : 600px; width:500px;margin: auto;">
+<img src='{{img.url}}' height="100" width="80">
+{% csrf_token %}
+<input type="file" name="img" accept="image/*">
+<br>
+<hr>
+
+<b>昵称：<b/>
+<input type="text" name="realname" value="{{name}}" placeholder="昵称(最大长度12)" Maxlength="12";style="border-radius:10px;" >
+
+
+<hr>修改密码：<br>
+<input type="password" autocomplete="off" placeholder="旧密码" name="q1"><br>
+<input type="password" autocomplete="off" placeholder="新密码"name="q2"><br>
+
+
+<hr>
+性别：
+{% if sex %}
+<input type="radio" name="sex" value="1" checked >男
+<input type="radio" name="sex" value="0">女
+{% else %}
+<input type="radio" name="sex" value="1">男
+<input type="radio" name="sex" value="0" checked >女
+{% endif %}
+
+
+<hr>生日：<br>
+
+  <select name="YYYY" onchange="YYYYDD(this.value)" >
+    <option value="">请选择 年</option>
+  </select>
+  <select name="MM" onchange="MMDD(this.value)">
+    <option value="">选择 月</option>
+  </select>
+  <select name="DD">
+    <option value="">选择 日</option>
+  </select>
+</form>
+<script language="JavaScript"><!--   
+   function YYYYMMDDstart()   
+   {   
+           MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];   
+    
+           //先给年下拉框赋内容   
+           var y  = {{year}};   
+           for (var i = (y-30); i < (y+30); i++) //以今年为准，前30年，后30年   
+                   document.reg_testdate.YYYY.options.add(new Option(" "+ i +" 年", i));   
+    
+           //赋月份的下拉框   
+           for (var i = 1; i < 13; i++)   
+                   document.reg_testdate.MM.options.add(new Option(" " + i + " 月", i));   
+    
+           document.reg_testdate.YYYY.value = y;   
+           document.reg_testdate.MM.value = {{month}};   
+           var n = MonHead[new Date().getMonth()];   
+           if (new Date().getMonth() ==1 && IsPinYear(YYYYvalue)) n++;   
+                writeDay(n); //赋日期下拉框Author:meizz   
+           document.reg_testdate.DD.value ={{day}};   
+   }   
+   if(document.attachEvent)   
+       window.attachEvent("onload", YYYYMMDDstart);   
+   else   
+       window.addEventListener('load', YYYYMMDDstart, false);   
+   function YYYYDD(str) //年发生变化时日期发生变化(主要是判断闰平年)   
+   {   
+           var MMvalue = document.reg_testdate.MM.options[document.reg_testdate.MM.selectedIndex].value;   
+           if (MMvalue == ""){ var e = document.reg_testdate.DD; optionsClear(e); return;}   
+           var n = MonHead[MMvalue - 1];   
+           if (MMvalue ==2 && IsPinYear(str)) n++;   
+                writeDay(n)   
+   }   
+   function MMDD(str)   //月发生变化时日期联动   
+   {   
+        var YYYYvalue = document.reg_testdate.YYYY.options[document.reg_testdate.YYYY.selectedIndex].value;   
+        if (YYYYvalue == ""){ var e = document.reg_testdate.DD; optionsClear(e); return;}   
+        var n = MonHead[str - 1];   
+        if (str ==2 && IsPinYear(YYYYvalue)) n++;   
+       writeDay(n)   
+   }   
+   function writeDay(n)   //据条件写日期的下拉框   
+   {   
+           var e = document.reg_testdate.DD; optionsClear(e);   
+           for (var i=1; i<(n+1); i++)   
+                e.options.add(new Option(" "+ i + " 日", i));   
+   }   
+   function IsPinYear(year)//判断是否闰平年   
+   {     return(0 == year%4 && (year%100 !=0 || year%400 == 0));}   
+   function optionsClear(e)   
+   {   
+        e.options.length = 1;   
+   }   
+   //--></script>
+
+<hr>
+电话：
+<input type="text" name="telephone"   value="{{phone}}" placeholder="电话号码">
+<hr>邮箱：
+<input type="text" name="mailbox" value="{{email}}" placeholder="邮箱">
+
+<br><br>
+<button type="submit">保存</button>
+<a href='/private/page/1'><button type="button">返回</button></a>
+<br>
+
+
+</body>
+</html>
