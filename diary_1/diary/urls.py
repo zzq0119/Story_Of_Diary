@@ -20,11 +20,13 @@ from django.conf.urls import url
 from django.views.static import serve
 import django.contrib.auth.views
 
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('',include('diary_main.urls')),
     path('admin/', admin.site.urls),
     url(r'^media/(?P<path>.*)$', serve, {"document_root":settings.MEDIA_ROOT})
-]
+]+ static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
     
 '''
     #

@@ -1,12 +1,11 @@
 /** 
- * Copyright 2008 Breezy New Media
  * =====================================     
  */     
 
 /* -- Basics -- */
 html, body, div, p, li, ul, ol, form, fieldset, h1, h2, h3, h4, h5, h6   { margin: 0; padding: 0; list-style: none; }
 
-body		      { font: normal 62.8%/1.3 Arial, Helvetica, sans-serif;  background: #006699 url('../images/timg.jpg'); background-size: 100% 100%;color: #585c5e; padding: 70px 0; }
+body		      { font: normal 62.8%/1.3 Arial, Helvetica, sans-serif; background: #006699 url('../images/back2.jpg') repeat-x; color: #585c5e; padding: 70px 0; }
 a			        { color: #148d04; }
 a:hover	      { text-decoration: underline !important; color: #000;}
 a img   	    { border: 0; }
@@ -15,7 +14,7 @@ input
 select,
 textarea      { font-family: Arial, lucida, sans-serif; font-size: 1em; vertical-align: middle; }
 input, 
-textarea	    { background: #044979; padding: 2px 0; margin: 0; border: 1px solid #1776a4; color: #cde2f0; }
+textarea	    { background: #FBFBFF; padding: 2px 0; margin: 0; border: 1px solid #1776a4; color: #cde2f0; }
 button	      { vertical-align: middle; margin: 0; padding: 0; height: 18px; border: none; text-decoration: underline; font-weight: bold; color: #00CCFF; cursor: pointer; }
 .submit       { width: auto !important; overflow: visible; background-color: #312b2a; border: 1px solid #000 !important; padding: 0 5px; color: #fff; font-weight: bold; cursor: pointer; }
 
@@ -56,8 +55,8 @@ fieldset    { border: 0 !important; }
 #foot     { font-size: 1.2em; clear: both; }
 
 /* -- Logo constructs -- */
-#main       { position: relative; padding-left: 25px; margin-bottom: 12px; }
-#main h1    { font-family: sans-serif; font-size: 2.2em; }
+#main       { position: relative; padding-left: 30px; margin-bottom: 13px; }
+#main h1    { font-family: sans-serif; font-size: 2.2em; color: #fff;}
 #main h1 a  { text-decoration: none; color: #fff !important; }
 #main h2    { font-weight: normal; font-size: 1em; padding-left: 2px; margin-top: -3px; }
 #main h2,
@@ -65,9 +64,9 @@ fieldset    { border: 0 !important; }
 
 #head a:hover { text-decoration: none !important; }
 
-#logo { height: 236px; background: #63b7dd url('../images/timggg.jpg') no-repeat; }
+#logo { height: 236px; background: #63b7dd url('../images/bg-logo2.jpg') no-repeat; }
 #logo *     { color: #eaafa3; text-decoration: none !important; }
-#logo h2    { font-weight: normal; font-size: 1.5em; color: #d6ecf9; margin: 100px 0 0 70px; }
+#logo h2    { font-weight: normal; font-size: 3em; color: #d6ecf9; margin: 80px 0 0 70px; }
 #logo .block{ position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; text-decoration: none; }
 
 /* -- Main classes -- */
@@ -94,7 +93,7 @@ img.left  { margin-left: 0 !important; }
 img.right { margin-right: 0 !important; }
 
 /* -- Layout constructs -- */
-#logo       { position: relative; width: 100%; height: 232px; overflow: hidden; background: #398db9 url('../images/timggg.jpg') 0 0 no-repeat;background-size:100% 100% }
+#logo       { position: relative; width: 100%; height: 232px; overflow: hidden; background: #398db9 url('../images/bg-logo.jpg') 0 0 no-repeat; }
 #mainMenu   { height: 43px; padding: 0 12px; background: #0f2132 url('../images/bg-menu.gif') no-repeat; }
 #content    { width: 100%; height: 100%; background: #fff url('../images/bg-content.gif') repeat-y; float: left; }
 #foot       { height: 54px; background: #0f2132 url('../images/bg-foot.gif') no-repeat; }
@@ -126,7 +125,7 @@ img.right { margin-right: 0 !important; }
 
 /* -- Left (content) block -- */
 #content > #contentBlock        { margin-bottom: 0; }
-#contentBlock                   { position: relative; left: 1px; float: left; width: 502px; min-height: 550px; margin-bottom: -20px; padding: 20px 0; background: url('../images/bg-content_left.gif') 100% 100% no-repeat; }
+#contentBlock                   {position: relative; left: 2px; float: left; width: 502px; min-height: 550px; margin-bottom: -20px; padding: 20px 0;background: url('../images/bg-content_left.gif') 100% 100% no-repeat; }
 #contentBlock img               { margin: 3px; }
 #contentBlock table tr.add td,
 #contentBlock table tr.add th   { background: url('../images/bg-table_line.gif') repeat-x; }
@@ -135,8 +134,8 @@ img.right { margin-right: 0 !important; }
 #contentBlock .item h3,
 #contentBlock .item h4,
 #contentBlock .item p           { font-weight: normal; }
-#contentBlock .itemOdd          { position: relative; left: -11px; background: url('../images/bg-article.gif') repeat-y; width: 230px; padding-right: 0; }
-#contentBlock .itemEven         { padding-right: 0; }
+#contentBlock .itemOdd          { position: relative; left: -11px; background: url('../images/bg-article.gif') repeat-y; width: 502px; padding-right: 0; }
+#contentBlock .itemEven         { position: relative; left: -11px;width: 452px;padding-right:0; }
 #contentBlock .mainItem         { padding-right: 0; }
 #contentBlock .mainItem .perex  { color: #014679; width: 452px; padding: 25px; margin-left: -25px; margin-bottom: 2em !important; border-bottom: 1px #dff1f9 solid; background-color: #ecf8ff; }
 
