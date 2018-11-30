@@ -122,9 +122,9 @@ def private_setting(request):
     if 'u_id' in request.session and 'username' in request.session:
         u_id=request.session['u_id']
         user=User.objects.get(id=u_id)
-        content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':'女','date':user.birthday,'phone':user.telephone}
-        if user.sex:
-            content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':'男','date':user.birthday,'phone':user.telephone}
+        content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':0,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email}
+        if user.sex=="男":
+            content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':1,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email}
         if request.method=="POST":
             if request.FILES.get("img"):
                 user.img=request.FILES.get("img")
@@ -136,8 +136,8 @@ def private_setting(request):
                     user.sex="女"
                 else:
                     user.sex="男"
-            if request.POST.get("year") and request.POST.get("month") and request.POST.get("day"):
-                user.birthday=date(int(request.POST.get("year")),int(request.POST.get("month")),int(request.POST.get("day")))
+            if request.POST.get("YYYY") and request.POST.get("MM") and request.POST.get("DD"):
+                user.birthday=date(int(request.POST.get("YYYY")),int(request.POST.get("MM")),int(request.POST.get("DD")))
             if request.POST.get("telephone"):
                 user.telephone=request.POST.get("telephone")
             if request.POST.get("mailbox"):
@@ -145,6 +145,9 @@ def private_setting(request):
             if request.POST.get('q1')==user.password and request.POST.get('q2'):
                 user.password=request.POST.get('q2')
             user.save()
+            content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':0,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email}
+            if user.sex=="男":
+                content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':1,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email}
         return render(request, 'private_setting.html', content)
     else:
         return render(request,'index.html',{'error_message':'Login First.'})

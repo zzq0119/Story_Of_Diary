@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 {% load static %}
 
 <html>
@@ -10,14 +10,14 @@
 <body  background="{% static 'images/bg.jpg'%}" style=" background-repeat:no-repeat ;background-size:100% 100%;background-attachment:fixed " >
 
 <form name="reg_testdate"method="POST" enctype="multipart/form-data" style="height : 600px; width:500px;margin: auto;">
-<img src='{{ img.img.url }}' height="100" width="80">
+<img src='{{img.url}}' height="100" width="80">
 {% csrf_token %}
 <input type="file" name="img" accept="image/*">
 <br>
 <hr>
 
 <b>昵称：<b/>
-<input type="text" name="realname" placeholder="昵称(最大长度12)" Maxlength="12";style="border-radius:10px;" >
+<input type="text" name="realname" value="{{name}}" placeholder="昵称(最大长度12)" Maxlength="12";style="border-radius:10px;" >
 
 
 <hr>修改密码：<br>
@@ -27,13 +27,18 @@
 
 <hr>
 性别：
-<input type="radio" name="sex" value="0">男
-
+{% if sex %}
+<input type="radio" name="sex" value="1" checked >男
 <input type="radio" name="sex" value="0">女
+{% else %}
+<input type="radio" name="sex" value="1">男
+<input type="radio" name="sex" value="0" checked >女
+{% endif %}
+
 
 <hr>生日：<br>
 
-  <select name="YYYY" onchange="YYYYDD(this.value)">
+  <select name="YYYY" onchange="YYYYDD(this.value)" >
     <option value="">请选择 年</option>
   </select>
   <select name="MM" onchange="MMDD(this.value)">
@@ -49,7 +54,7 @@
            MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];   
     
            //先给年下拉框赋内容   
-           var y  = new Date().getFullYear();   
+           var y  = {{year}};   
            for (var i = (y-30); i < (y+30); i++) //以今年为准，前30年，后30年   
                    document.reg_testdate.YYYY.options.add(new Option(" "+ i +" 年", i));   
     
@@ -58,11 +63,11 @@
                    document.reg_testdate.MM.options.add(new Option(" " + i + " 月", i));   
     
            document.reg_testdate.YYYY.value = y;   
-           document.reg_testdate.MM.value = new Date().getMonth() + 1;   
+           document.reg_testdate.MM.value = {{month}};   
            var n = MonHead[new Date().getMonth()];   
            if (new Date().getMonth() ==1 && IsPinYear(YYYYvalue)) n++;   
                 writeDay(n); //赋日期下拉框Author:meizz   
-           document.reg_testdate.DD.value = new Date().getDate();   
+           document.reg_testdate.DD.value ={{day}};   
    }   
    if(document.attachEvent)   
        window.attachEvent("onload", YYYYMMDDstart);   
@@ -100,9 +105,9 @@
 
 <hr>
 电话：
-<input type="text" name="telephone" placeholder="电话号码">
+<input type="text" name="telephone"   value="{{phone}}" placeholder="电话号码">
 <hr>邮箱：
-<input type="text" name="mailbox" placeholder="邮箱">
+<input type="text" name="mailbox" value="{{email}}" placeholder="邮箱">
 
 <br><br>
 <button type="submit">保存</button>
