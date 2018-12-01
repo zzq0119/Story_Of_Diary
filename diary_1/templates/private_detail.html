@@ -67,6 +67,10 @@ color:black;
         <p class="info"><span class="date">上传日期：{{pub_date}}</span></p>
 	<p class="perex"><font size="3">{{text}}</font></p>	
       <button title="click to read" style="border:1px solid;"><a href={{url}}>编辑日记</a></button>
+	 <form action="{% url 'private_detail' d_id%}" method="post">
+	  {%csrf_token%}
+	<input type="submit" value="删除" title="click to read" style="border:1px solid;">
+	</form>
 	  </div>
   <!-- /#main content construct -->
   <!-- #accessible components - do not delete this !!! -->
