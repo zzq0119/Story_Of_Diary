@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 {% load static %}
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
 <head>   
 <meta charset="utf-8">
 <meta http-equiv="content-type" content="text/html" />
@@ -32,11 +31,11 @@
     <!-- main horizontal menu -->
     <div id="mainMenu">
       <ul>
-        <li><a href="http://www.baidu.com">日记社区<span></span></a></li>
-        <li class="active"><a href="#content">个人主页<span></span></a></li>
-        <li class="fr"><a href="http://www.baidu.com">关于<span></span></a></li>
-        <li class="fr"><a href="http://www.baidu.com">获取帮助<span></span></a></li>
-        <li class="fr"><a href="http://www.baidu.com">设置<span></span></a></li>
+        <li><a href={{public}}>日记社区<span></span></a></li>
+        <li class="active"><a href={{private}}>个人主页<span></span></a></li>
+        <!--li class="fr">关于<span></span></a></li-->
+        <!--li class="fr">获取帮助<span></span></a></li-->
+        <li class="fr"><a href='/private/setting/'>设置<span></span></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
@@ -54,10 +53,10 @@
 	  <a href={{url}}>返回</a>
       <form action="{% url 'private_edit' d_id%}" method="post">
 {% csrf_token %}
-<textarea name=file1 rows=1 cols=100>
+      标题： <input type="text" name="fname" />
 {{diary_title}}
 </textarea><br>
-<textarea name=file rows=30 cols=100>
+<textarea rows="10" cols="40" style=" font-size:22px; resize:none" >
 {{content}}
 </textarea><br>
 公开?<input type="checkbox" value="1" name="check_box"/>
@@ -86,16 +85,20 @@
       <div class="box subMenu">
         <h3>个人设置:</h3>
         <ul>
-          <li><a href="http://www.baidu.com">个人简介</a></li>
-          <li><a href="http://www.baidu.com">照片</a></li>
-          <li><a href="http://www.baidu.com">联系</a></li>
+          <li><a href='/private/setting/'>个人简介</a></li>
+          <li><a href='/private/setting/'>照片</a></li>
+          <li><a href='/private/setting/'>联系</a></li>
         </ul>
       </div>
       <div class="box subMenu">
             <h3>查看:</h3>
-            <ul>
-               <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text">
-            </ul>
+           <form action={% url 'private' 1%} method="post">
+			{% csrf_token %}
+          <ul>
+              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
+          </ul>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" value="确定"/> 
+		  </form>
       </div>    
     </div>
     <!-- /#right part of web -->
