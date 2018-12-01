@@ -41,7 +41,19 @@ def signUp(request):
     return render(request,'signUpSuccess.html')
 
 def help(request):
-    return render(request,'help.html')
+    if 'u_id' in request.session and 'username' in request.session:
+        user_name=request.session['username']
+        u_id=request.session['u_id']
+        user=get_object_or_404(User,id=u_id)
+        dist={}
+        dist['name']=user.realname
+        dist['public']=reverse('public',args=(1,))
+        dist['private']=reverse('private',args=(1,))
+        dist['setting']=reverse('private_setting')
+        dist['new']=reverse('private_edit_new')
+        return render(request,'help.html',dist)
+    else:
+        return render(request,'index.html',{'error_message':'Login First.'})
     
 def signOut(request):
     if request.session:
@@ -67,13 +79,13 @@ def public(request,page):
         for i in range(len(diary_list)):
             dist['diary'+str(i+1)]=diary_list[i]
             dist['url'+str(i+1)]=reverse('public_detail',args=(diary_list[i].id,))
-        dist['user']=user.realname
         dist['name']=user.realname
         dist['age']=datetime.datetime.today().year-User.objects.get(id=u_id).birthday.year
         dist['public']=reverse('public',args=(1,))
         dist['private']=reverse('private',args=(1,))
         dist['setting']=reverse('private_setting')
         dist['new']=reverse('private_edit_new')
+        dist['help']=reverse('help')
         dist['picture']=user
         dist['img']=user.img
         dist['sex']=user.sex
@@ -115,11 +127,12 @@ def private(request,page):
             dist['diary'+str(i+1)]=diary_list[i]
             dist['url'+str(i+1)]=reverse('private_detail',args=(diary_list[i].id,))
         dist['age']=datetime.datetime.today().year-User.objects.get(id=u_id).birthday.year
-        dist['user']=user.realname
+        dist['name']=user.realname
         dist['public']=reverse('public',args=(1,))
         dist['private']=reverse('private',args=(1,))
         dist['setting']=reverse('private_setting')
         dist['picture']=user
+        dist['help']=reverse('help')
         dist['img']=user.img
         dist['sex']=user.sex
         dist['year']=user.birthday.year
@@ -172,6 +185,20 @@ def public_detail(request,d_id):
         diary_list=Diary.objects.filter(public=True)
         dist={'back':reverse('public',args=(1,)),'picture':user,'list':diary_list,'pub_date':diary.pub_date,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,
               'user_name':user.username,'title':diary.title,'text':diary.diary_text,'author':diary.user.username,'email':user.email,'praise':diary.praise}
+        dist['public']=reverse('public',args=(1,))
+        dist['private']=reverse('private',args=(1,))
+        dist['setting']=reverse('private_setting')
+        dist['new']=reverse('private_edit_new')
+        dist['help']=reverse('help')
+        dist['name']=user.realname
+        dist['img']=user.img
+        dist['picture']=user
+        dist['sex']=user.sex
+        dist['year']=user.birthday.year
+        dist['month']=user.birthday.month
+        dist['day']=user.birthday.day
+        dist['phone']=user.telephone
+        dist['email']=user.email
         if user.sex=="男":
             dist['sex']="男"
         if user.sex=="女":
@@ -190,6 +217,20 @@ def private_detail(request,d_id):
         diary_list=user.diary_set.all()
         dist={'back':reverse('private',args=(1,)),'piture':user,'list':diary_list,'pub_date':diary.pub_date,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,
               'user_name':user.username,'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,)),'email':user.email,'d_id':d_id}
+        dist['public']=reverse('public',args=(1,))
+        dist['private']=reverse('private',args=(1,))
+        dist['setting']=reverse('private_setting')
+        dist['picture']=user
+        dist['help']=reverse('help')
+        dist['new']=reverse('private_edit_new')
+        dist['name']=user.realname
+        dist['img']=user.img
+        dist['sex']=user.sex
+        dist['year']=user.birthday.year
+        dist['month']=user.birthday.month
+        dist['day']=user.birthday.day
+        dist['phone']=user.telephone
+        dist['email']=user.email
         if user.sex=="男":
             dist['sex']="男"
         if user.sex=="女":
@@ -214,15 +255,40 @@ def private_edit(request,d_id):
                 diary.public=True
             else:
                 diary.public=False
-            diary.title=request.POST.get('title')
-            diary.diary_text=request.POST.get('content')
+            diary.title=request.POST.get('file1')
+            diary.diary_text=request.POST.get('file')
             diary.simp_text=diary.diary_text[:100]+'...'
             diary.pub_date=datetime.datetime.today()
             diary.save()
             dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,)),'d_id':d_id}
+            dist['setting']=reverse('private_setting')
+            dist['new']=reverse('private_edit_new')
+            dist['help']=reverse('help')
+            dist['picture']=user
+            dist['name']=user.realname
+            dist['img']=user.img
+            dist['sex']=user.sex
+            dist['year']=user.birthday.year
+            dist['month']=user.birthday.month
+            dist['day']=user.birthday.day
+            dist['phone']=user.telephone
+            dist['email']=user.email
             return redirect('/private/page/1')
+            return render(request,'private_detail.html',dist)
         dist={'picture':user,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,
                                                'd_id':d_id,'diary_title':diary.title,'content':diary.diary_text,'mess':mess,'url':reverse('private_detail',args=(d_id,)),'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
+        dist['setting']=reverse('private_setting')
+        dist['new']=reverse('private_edit_new')
+        dist['help']=reverse('help')
+        dist['name']=user.realname
+        dist['img']=user.img
+        dist['picture']=user
+        dist['sex']=user.sex
+        dist['year']=user.birthday.year
+        dist['month']=user.birthday.month
+        dist['day']=user.birthday.day
+        dist['phone']=user.telephone
+        dist['email']=user.email
         if user.sex=="男":
             dist['sex']="男"
         if user.sex=="女":
@@ -242,12 +308,15 @@ def private_edit_new(request):
             if request.POST.get('check_box')=="1":
                 diary.public=True
                 mess='public'
-            diary.save()          
+            diary.save()
             dist={'back':reverse('private',args=(1,)),'title':diary.title,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,)),'d_id':diary.id}
+            dist['img']=user.img
             dist['setting']=reverse('private_setting')
             return redirect('/private/page/1')
-        dist={'url':reverse('private',args=(1,)),'picture':user,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
+        dist={'url':reverse('private',args=(1,)),'picture':user,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'d_id':diary.id,'private':reverse('private',args=(1,))}
         dist['setting']=reverse('private_setting')
+        dist['img']=user.img
+        dist['help']=reverse('help')
         if user.sex=="男":
             dist['sex']="男"
         elif user.sex=="女":
