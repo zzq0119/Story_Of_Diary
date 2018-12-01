@@ -9,6 +9,7 @@
 <title>Story of diary</title>
 <link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" media="screen" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print" />
+<script src="{% static 'js/datePlugin.js' %}"></script>
 </head>
 <body>
 <div id="view">
@@ -18,12 +19,10 @@
     <div id="main">
       <h1>日记故事</a></h1>
       <h2>test version</a></h2>
-      <form action="" method="post" id="search">
-        <fieldset>
+      <div id="signout">
             <h2>已登录：{{user_name}}</h2> 
             <h2><a href="/private/signOut">注销</a></h2>
-        </fieldset>
-      </form>
+      </div>
     </div>
     <!-- /main headings with search component -->
     <hr class="hidden" />
@@ -32,7 +31,7 @@
       <ul>
         <li><a href={{public}}>日记社区<span></span></a></li>
         <li class="active"><a href={{private}}>个人主页<span></span></a></li>
-        <li class="fr"><a href="http://www.baidu.com">获取帮助<span></span></a></li>
+        <li class="fr"><a href="/help">获取帮助<span></span></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
@@ -146,12 +145,11 @@
       </div>
       <div class="box subMenu">
         <h3>按日期查看:</h3>
-	<form action={% url 'private' 1%} method="post">
+	<form action={% url 'private' 1%} method="post" id="view_by_date">
 	    {% csrf_token %}
          <ul>
              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
          </ul>
-	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" value="确定"/> 
 	 </form>
       </div>
     </div>

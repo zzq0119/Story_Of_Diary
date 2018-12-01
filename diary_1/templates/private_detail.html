@@ -30,12 +30,10 @@ color:black;
     <div id="main">
             <h1>日记故事</a></h1>
             <h2>test version</a></h2>      
-      <form action="" method="post" id="search">
-        <fieldset>
+    <div id="signout">
 	<h2 style="color:black;">已登录：{{user_name}}</h2> 
                 <li><a href="/private/signOut">注销</a></li>
-        </fieldset>
-      </form>
+	</div>
     </div>
     <!-- /main headings with search component -->
     <hr class="hidden" />
@@ -69,6 +67,10 @@ color:black;
         <p class="info"><span class="date">上传日期：{{pub_date}}</span></p>
 	<p class="perex"><font size="3">{{text}}</font></p>	
       <button title="click to read" style="border:1px solid;"><a href={{url}}>编辑日记</a></button>
+	 <form action="{% url 'private_detail' d_id%}" method="post">
+	  {%csrf_token%}
+	<input type="submit" value="删除" title="click to read" style="border:1px solid;">
+	</form>
 	  </div>
   <!-- /#main content construct -->
   <!-- #accessible components - do not delete this !!! -->
