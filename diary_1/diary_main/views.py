@@ -152,7 +152,7 @@ def public_detail(request,d_id):
         diary=Diary.objects.get(id=d_id)
         diary_list=Diary.objects.filter(public=True)
         dist={'back':reverse('public',args=(1,)),'picture':user,'list':diary_list,'pub_date':diary.pub_date,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,
-              'user_name':user.username,'title':diary.title,'text':diary.diary_text,'author':diary.user.username,'email':user.email}
+              'user_name':user.username,'title':diary.title,'text':diary.diary_text,'author':diary.user.username,'email':user.email,'praise':diary.praise}
         if user.sex=="男":
             dist['sex']="男"
         if user.sex=="女":
@@ -297,12 +297,18 @@ def public(request,page):
         for i in range(len(diary_list)):
             dist['diary'+str(i+1)]=diary_list[i]
             dist['url'+str(i+1)]=reverse('public_detail',args=(diary_list[i].id,))
+        if request.method=="POST":
+            for i in range(len(diary_list)):
+                if str(i+1) in request.POST:
+                    dist['diary'+str(i+1)].praise+=1
+                    dist['diary'+str(i+1)].save()
         dist['user']=user.realname
         dist['age']=datetime.datetime.today().year-User.objects.get(id=u_id).birthday.year
         dist['public']=reverse('public',args=(1,))
         dist['private']=reverse('private',args=(1,))
         dist['setting']=reverse('private_setting')
         dist['picture']=user
+        dist['page']=page
         return render(request,'public.html',dist)
     else:
         return render(request,'index.html',{'error_message':'Login First.'})
