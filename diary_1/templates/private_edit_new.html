@@ -94,10 +94,14 @@
         </ul>
       </div>
       <div class="box subMenu">
-            <h3>查看:</h3>
-            <ul>
-               <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text">
-            </ul>
+        <h3>按日期查看:</h3>
+		  <form action=/private/page/1/ method="post">
+			<input type="hidden" name="csrfmiddlewaretoken" value="FxxDF5AQpKKdeQ2tvocvRYyT3Xopa0bSWSkWEEYrzsGp3b7ph9cLd9nZ9AhRy4cK">
+          <ul>
+              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
+          </ul>
+		     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="确定"/> 
+		</form>
       </div>    
     </div>
     <!-- /#right part of web -->
