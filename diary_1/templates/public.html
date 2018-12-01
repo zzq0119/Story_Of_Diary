@@ -51,8 +51,8 @@
     <!-- #left part of web - main content -->
     <div id="contentBlock">
       <!-- #first (main) article -->
-      <div class="item mainItem">
-        <h2>{{diary1.title}}</h2>
+      <div class="item mainEven">
+        <h3>{{diary1.title}}</h3>
         <p class="info"><span class="date">{{diary1.pub_date}}</span></p>
         <p class="perex">{{diary1.simp_text}}</p>{% if url1 %}<a href={{url1}}>完整</a>
 	      <form action="{% url 'public' page%}" method="post">
