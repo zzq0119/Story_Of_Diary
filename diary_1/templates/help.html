@@ -32,8 +32,8 @@
     <!-- main horizontal menu -->
     <div id="mainMenu">
       <ul>
-        <li><a href="http://www.baidu.com">日记社区<span></span></a></li>
-        <li class="active"><a href="#content">个人主页<span></span></a></li>
+        <li><a href='/public/page/1'>日记社区<span></span></a></li>
+        <li class="active"><a href='/private/page/1'>个人主页<span></span></a></li>
         <!--li class="fr"><a href="http://www.baidu.com">关于<span></span></a></li-->
         <!--li class="fr"><a href="http://www.baidu.com">获取帮助<span></span></a></li-->
         <li class="fr"><a href='/private/setting/'>设置<span></span></a></li>
@@ -52,10 +52,10 @@
     <div id="contentBlock">
       <!-- #cols 50:50 -->
 
-      <textarea rows="40" cols="67" style=" font-size:9pt;font-family:verdana;color:#333333;background-color:white; resize:none" >
-~~~~~~~~~~~~~~~~~~~~~~~使用指南~~~~~~~~~~~~~~~~~~~~~~
-                                                                                                     by 软工小组
-                             使用 项目-日记故事 来与他人分享生活中的点滴
+      <textarea rows="40" cols="103" style=" font-size:9pt;font-family:verdana;color:#333333;background-color:white; resize:none" >
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~使用指南~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                                                 by 软工小组
+                                                        使用 项目-日记故事 来与他人分享生活中的点滴
 
 您是新用户？
 	完成注册以获取您的账号，返回登陆界面，键入用户名和密码以登陆。
@@ -65,7 +65,7 @@
 
 编辑您的第一份日记：
 	点击新建->输入日记主题和内容->选择是否公开*->点击保存，至此，您的第一份日记便成功保存，并随时可以再次查看。
-（*关于公开：公开的日记将会设置成为在公共区可见，您可以查看其他人公开的日记并对其内容进行评论，同样，您公开的日记也会对其他人开放阅读和评论的权限。）
+（*关于公开：公开的日记将会设置成为在公共区可见，您可以查看其他人公开的日记并对其内容进行评论，同时，您公开的日记也会对其他人开放阅读和评论的权限。）
 
 回顾以往的日记：
 	如果您在此之前已经保存过日记，那么进入个人中心->选择您想要回顾的日记->点击进入，即可查阅之前的日记。
@@ -79,38 +79,9 @@
 
       </textarea>
 
-      <div class="col2">
-        </a> </div>
-      <!-- /#cols 50:50 -->
+
     </div>
-    <!-- /#left part of web - main content -->
-    <hr class="hidden" />
-    <!-- #right part of web - submenu boxes with simple text -->
-    <div id="menuBlock">
-      <div class="box boxText firstBox">
-        <h3>个人信息</h3>
-        <div class="img"><img src="{% static 'images/timg.jpg'%}" width="56" alt="" /></div>
-        <div class="self">
-          <p class="last">用户名：<br />
-            年龄:&nbsp;18&nbsp;岁<br />
-        </div>
-      </div>
-      <div class="box subMenu">
-        <h3>个人设置:</h3>
-        <ul>
-          <li><a href='/private/setting/'>个人简介</a></li>
-          <li><a href='/private/setting/'>照片</a></li>
-          <li><a href='/private/setting/'>联系</a></li>
-        </ul>
-      </div>
-      <div class="box subMenu">
-            <h3>查看:</h3>
-            <ul>
-               <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text">
-            </ul>
-      </div>
-    </div>
-    <!-- /#right part of web -->
+
   </div>
   <!-- /#main content construct -->
   <!-- #accessible components - do not delete this !!! -->
