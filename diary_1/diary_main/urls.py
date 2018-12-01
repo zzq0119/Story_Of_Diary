@@ -14,4 +14,5 @@ urlpatterns = [
     path('private/detail/<int:d_id>/',views.private_detail,name='private_detail'),
     path('private/edit/<int:d_id>/',views.private_edit,name='private_edit'),
     path('private/edit/new/',views.private_edit_new,name='private_edit_new'),
+    path('help',views.help,name='help'),
 ]
