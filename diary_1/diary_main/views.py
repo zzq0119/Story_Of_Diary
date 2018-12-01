@@ -262,7 +262,7 @@ def private_edit(request,d_id):
             if 'delete' in request.POST:
                 diary.delete()
                 return HttpResponseRedirect(reverse('private',args=(1,)))
-            if request.POST.get('checkbox')=="1":
+            if request.POST.get('check_box')=="1":
                 diary.public=True
             else:
                 diary.public=False
@@ -276,7 +276,7 @@ def private_edit(request,d_id):
             dist['new']=reverse('private_edit_new')
             dist['help']=reverse('help')
             dist['picture']=user
-            dist['name']=user.realname
+            dist['name']=user.username
             dist['img']=user.img
             dist['sex']=user.sex
             dist['year']=user.birthday.year
@@ -316,7 +316,7 @@ def private_edit_new(request):
             diary=Diary(user=user,title=request.POST.get('title'),diary_text=request.POST.get('content'),simp_text=request.POST.get('content')[:100]+'...',public=False)
             mess='private'
             diary.pub_date=datetime.datetime.today()
-            if request.POST.get('checkbox')=="1":
+            if request.POST.get('check_box')=="1":
                 diary.public=True
                 mess='public'
             diary.save()
@@ -324,7 +324,7 @@ def private_edit_new(request):
             dist['img']=user.img
             dist['setting']=reverse('private_setting')
             return redirect('/private/page/1')
-        dist={'url':reverse('private',args=(1,)),'picture':user,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
+        dist={'url':reverse('private',args=(1,)),'picture':user,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.username,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
         dist['setting']=reverse('private_setting')
         dist['img']=user.img
         dist['help']=reverse('help')
