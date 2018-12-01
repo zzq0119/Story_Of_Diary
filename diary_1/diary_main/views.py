@@ -255,8 +255,8 @@ def private_edit(request,d_id):
                 diary.public=True
             else:
                 diary.public=False
-            diary.title=request.POST.get('file1')
-            diary.diary_text=request.POST.get('file')
+            diary.title=request.POST.get('title')
+            diary.diary_text=request.POST.get('content')
             diary.simp_text=diary.diary_text[:100]+'...'
             diary.pub_date=datetime.datetime.today()
             diary.save()
