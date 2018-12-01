@@ -21,8 +21,20 @@ class Diary(models.Model):
     pub_date = models.DateTimeField('date published')
     title=models.CharField(max_length=50)
     public=models.BooleanField(default=False)
+    praise=models.IntegerField(default=0)
     def __str__(self):
         return self.simp_text
+    def __iter__(self):
+        return self
+    def next(self):
+                if self._i == 0:
+                        self._i += 1
+                        return self.name
+                elif self._i == 1:
+                        self._i += 1
+                        return self.age
+                else:
+                        raise StopIteration()
        
 class Comment(models.Model):
     diary=models.ForeignKey(Diary,on_delete=models.CASCADE)
