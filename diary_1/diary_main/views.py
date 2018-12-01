@@ -246,8 +246,7 @@ def private_edit_new(request):
             dist['setting']=reverse('private_setting')
             dist={'back':reverse('private',args=(1,)),'title':diary.title,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,))}
             return render(request,'private_detail.html',dist)
-        dist={'url':reverse('private',args=(1,)),'picture':user,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
-        dist['setting']=reverse('private_setting')
+        dist={'url':reverse('private',args=(1,)),'picture':user,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,)),'setting':reverse('private_setting')}
         if user.sex=="男":
             dist['sex']="男"
         elif user.sex=="女":
