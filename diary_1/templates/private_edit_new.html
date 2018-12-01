@@ -66,7 +66,7 @@ function check_form(){
       <textarea rows="10" cols="40" style=" font-size:22px; resize:none" name="content" id="content"></textarea><hr>
       <ul>  
         是否公开？
-        <label><input name="public" type="checkbox" value="" />是 </label> 
+        <label><input name="public" type="checkbox" value="1" />是 </label> 
         <!--label><input name="check_box" type="radio" value="" checked="true"/>否 </label--> 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
       <input type="button" value="保存" onclick="check_form()"  style="width:100px;height:25px;line-height:18px;font-size:18px;border-radius: 3px; background: #1E90FF;color: white;border-width: 0px; cursor: pointer; ">
@@ -87,7 +87,7 @@ function check_form(){
         <h3>个人信息</h3>
         <div class="img"><img src={{img.url}} width="56" alt="" /></div>
         <div class="self">
-          <p class="last">用户名：{{user}}<br />
+          <p class="last">用户名：{{name}}<br />
             年龄:&nbsp;{{age}}&nbsp;岁<br />
             生日：{{year}}-{{month}}-{{day}}<br/>
             性别：{{sex}}<br/>

@@ -262,7 +262,7 @@ def private_edit(request,d_id):
             if 'delete' in request.POST:
                 diary.delete()
                 return HttpResponseRedirect(reverse('private',args=(1,)))
-            if request.POST.get('check_box')=="1":
+            if request.POST.get('checkbox')=="1":
                 diary.public=True
             else:
                 diary.public=False
@@ -316,7 +316,7 @@ def private_edit_new(request):
             diary=Diary(user=user,title=request.POST.get('title'),diary_text=request.POST.get('content'),simp_text=request.POST.get('content')[:100]+'...',public=False)
             mess='private'
             diary.pub_date=datetime.datetime.today()
-            if request.POST.get('check_box')=="1":
+            if request.POST.get('checkbox')=="1":
                 diary.public=True
                 mess='public'
             diary.save()
