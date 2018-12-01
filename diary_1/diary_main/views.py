@@ -94,6 +94,7 @@ def public(request,page):
         dist['day']=user.birthday.day
         dist['phone']=user.telephone
         dist['email']=user.email
+        dist['page']=page
         return render(request,'public.html',dist)
     else:
         return render(request,'index.html',{'error_message':'Login First.'})
