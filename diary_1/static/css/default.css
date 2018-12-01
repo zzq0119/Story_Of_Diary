@@ -65,7 +65,7 @@ fieldset    { border: 0 !important; }
 
 #head a:hover { text-decoration: none !important; }
 
-#logo { height: 236px; background: #63b7dd url('../images/timggg.jpg') no-repeat; }
+#logo { height: 236px; background: #63b7dd url('../images/ww.jpg') no-repeat; }
 #logo *     { color: #eaafa3; text-decoration: none !important; }
 #logo h2    { font-weight: normal; font-size: 1.5em; color: #d6ecf9; margin: 100px 0 0 70px; }
 #logo .block{ position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; text-decoration: none; }
@@ -94,7 +94,7 @@ img.left  { margin-left: 0 !important; }
 img.right { margin-right: 0 !important; }
 
 /* -- Layout constructs -- */
-#logo       { position: relative; width: 100%; height: 232px; overflow: hidden; background: #398db9 url('../images/timggg.jpg') 0 0 no-repeat;background-size:100% 100% }
+#logo       { position: relative; width: 100%; height: 232px; overflow: hidden; background: #398db9 url('../images/ww.jpg') 0 0 no-repeat;background-size:100% 100% }
 #mainMenu   { height: 43px; padding: 0 12px; background: #0f2132 url('../images/bg-menu.gif') no-repeat; }
 #content    { width: 100%; height: 100%; background: #fff url('../images/bg-content.gif') repeat-y; float: left; }
 #foot       { height: 54px; background: #0f2132 url('../images/bg-foot.gif') no-repeat; }
