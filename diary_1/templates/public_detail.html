@@ -1,0 +1,116 @@
+<!DOCTYPE html">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<title>DeepBlue - by www.865171.cn</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/default.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/print.css" media="print" />
+<style>
+textarea {
+color:black;
+background:lightblue;
+boarder:white;
+}
+input{
+color:black;
+background:lightgray;
+}
+h2{
+color:black;
+}
+</style>
+</head>
+<body>
+<div id="view">
+  <!-- #header (main heading + logo with slogan) -->
+  <div id="head">
+    <!-- main headings with search component -->
+    <div id="main">
+       <div class="box boxText firstBox">
+        <h3>我的信息</h3>
+        <div class="img"><img src="images/profile.jpg" width="56" alt="" /></div>
+        <div class="self">
+          <p class="last">昵称:{{realname}}<br />
+            年龄:&nbsp;{{age}}&nbsp;�?br />
+            性别:{{sex}}<br />
+            email:&nbsp;{{email}}</p>
+        </div>
+    </div>
+    <p class="info"><font size="5">'</font></p> 
+    <p class="info"><font size="5">'</font></p>
+    <p class="info"><font size="5">'</font></p>
+      <form action="" method="post" id="search">
+        <fieldset>
+	<h2 style="color:black;">已登录：{{user_name}}</h2> 
+                <li><a href="/private/signOut">注销</a></li>
+        </fieldset>
+      </form>
+    </div>
+    <!-- /main headings with search component -->
+    <hr class="hidden" />
+    <!-- main horizontal menu -->
+    <div id="mainMenu">
+      <ul>
+        <li><a href="http://www.baidu.cn">写日�?/a></li>
+        <li ><a href="http://www.baidu.cn">日记广场</a></li>
+        <li><a href="http://www.baidu.cn">个人设置</a></li>
+        <li><a href="http://www.baidu.cn">不知�?/a></li>
+      </ul>
+    </div>
+    <!-- /main horizontal menu -->
+    <hr class="hidden" />
+    <!-- logo with slogan -->
+    <div id="logo">
+      <h2 style="color:black; text-align: center;">这里有一句口�?/h2>
+    </div>
+    <!-- /logo with slogan -->
+    <hr class="hidden" />
+  </div>
+  <!-- /#header (main heading + logo with slogan) -->
+  <!-- #main content construct -->
+  <div id="content">
+    <!-- #left part of web - main content -->
+    <div id="contentBlock">
+      <!-- #first (main) article -->
+      <div class="item mainItem">
+	<p class="info"><font size="5">日记广场</font></p>	
+        <p class="info">日记 :{{title}}</p>
+	<p class="info">作�?{{author}}</p>
+        <p class="info"><span class="date">发布日期：{{pub_date}}</span></p>
+	<p class="perex"><font size="3">{{text}}</font></p>
+      
+      </div>
+  <!-- /#main content construct -->
+  <!-- #accessible components - do not delete this !!! -->
+  <hr class="hidden" />
+  <ul class="hidden">
+    <li><a href="#view">On top</a></li>
+    <li><a href="#content">Back to content</a></li>
+  </ul>
+  <hr class="hidden" />
+  <!-- /#accessible components -->
+</div>
+<div id="menuBlock">
+    <!-- /#left part of web - main content -->
+    <hr class="hidden" />
+    <!-- #right part of web - submenu boxes with simple text -->
+      <div class="box subMenu">
+        <li><font size="4">目录:</font></li>
+	{% for i in list%}
+	<ul>
+	<li><a href="{%url 'public_detail' i.id%}">{{i.title}}</a></li>
+	</ul>
+	{%endfor%}
+    </div>
+    <!-- /#right part of web -->
+  </div>
+<!-- #footer -->
+  <div id="foot">
+    <p class="fl">&copy; all rights reserved</p>
+    <!-- /#   LINKS AND AUTHOR-SIGNATURE CANNOT BE REMOVED !!! -->
+    <p class="fr">created by&nbsp;<a href="http://www.baidu.cn" class="ico ico-breezy">www.baidu.cn</a></p>
+  </div>
+  <!-- /#footer -->
+</body>
+</html>

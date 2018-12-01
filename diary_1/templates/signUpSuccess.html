@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>   
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html" />
+<meta name="author" content="软工小组" />
+<meta name="description" content=""  />
+<meta name="keywords" content="" />
+<title>跳转页</title>
+</head>
+<body>
+<p>自动跳转中，请稍后...</p>
+<script>
+    onload=function () {
+        setInterval(go,1000)
+    };
+    var x=1;
+    function go() {
+
+        if (x<0){
+            location.href="/";
+        }
+        x--;
+    }
+</script>
+</body>
