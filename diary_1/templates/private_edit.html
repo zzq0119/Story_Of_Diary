@@ -29,11 +29,11 @@
     <!-- main horizontal menu -->
     <div id="mainMenu">
       <ul>
-        <li><a href={{public}}>日记社区<span></span></a></li>
-        <li class="active"><a href={{private}}>个人主页<span></span></a></li>
-        <!--li class="fr">关于<span></span></a></li-->
-        <!--li class="fr">获取帮助<span></span></a></li-->
-        <li class="fr"><a href='/private/setting/'>设置<span></span></a></li>
+        <li><a href={{public}}><font size=3>日记广场<span></span></font></a></li>
+        <li class="active"><a href={{private}}><font size=3>个人主页<span></span></font></a></li>
+        <li><a href={{new}}><font size=3>写日记<span></span></font></a></li>
+        <li class="fr"><a href={{setting}}><font size=3>个人设置<span</span></font></a></li>
+        <li class="fr"><a href="/help"><font size=3>获取帮助<span></span></font></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
@@ -72,13 +72,15 @@
     <!-- #right part of web - submenu boxes with simple text -->
     <div id="menuBlock">
       <div class="box boxText firstBox">
-        <h3>我的信息</h3>
-        <div class="img"><img src={{picture.img.url}} width="56" alt="" /></div>
+        <h3>个人信息</h3>
+        <div class="img"><img src={{img.url}} width="56" alt="" /></div>
         <div class="self">
-          <p class="last">昵称:{{realname}}<br />
+          <p class="last">用户名：{{user}}<br />
             年龄:&nbsp;{{age}}&nbsp;岁<br />
-            性别:{{sex}}<br />
-            email:&nbsp;{{email}}</p>
+            生日：{{year}}-{{month}}-{{day}}<br/>
+            性别：{{sex}}<br/>
+            电话：{{phone}}<br/>
+            邮箱：{{email}}<br/>
         </div></div>
       <div class="box subMenu">
         <h3>个人设置:</h3>
