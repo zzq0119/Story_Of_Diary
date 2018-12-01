@@ -28,7 +28,7 @@ color:black;
 <div id="main">
             <h1>日记故事</a></h1>
             <h2>test version</a></h2>   
-            <div id="signout">   
+            <div id="search">   
 	      <h2 style="color:black;">已登录：{{user_name}}</h2> 
                 <li><a href="/private/signOut">注销</a></li>
                 </div>
@@ -38,16 +38,18 @@ color:black;
     <!-- main horizontal menu -->
     <div id="mainMenu">
       <ul>
-        <li><a href={%url 'private_edit_new'%}>写日记</a></li>
-        <li ><a href={%url 'public' 1%}>日记广场</a></li>
-        <li><a href={%url 'private_setting'%}>个人设置</a></li>
+        <li><a href={{public}}><font size=3>日记广场<span></span></font></a></li>
+        <li class="active"><a href={{private}}><font size=3>个人主页<span></span></font></a></li>
+        <li><a href={{new}}><font size=3>写日记<span></span></font></a></li>
+        <li class="fr"><a href={{setting}}><font size=3>个人设置<span</span></font></a></li>
+        <li class="fr"><a href="/help"><font size=3>获取帮助<span></span></font></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
     <hr class="hidden" />
     <!-- logo with slogan -->
     <div id="logo">
-      <h2 style="color:black; text-align: center;">这里有一句口号</h2>
+      <h2 style="color:black; text-align: center;">分享你的故事</h2>
     </div>
     <!-- /logo with slogan -->
     <hr class="hidden" />
@@ -79,13 +81,15 @@ color:black;
 </div>
 <div id="menuBlock">
 	<div class="box boxText firstBox">
-                <h3>我的信息</h3>
-                <div class="img"><img src={{picture.img.url}} width="56" alt="" /></div>
-                <div class="self">
-                  <p class="last">昵称:{{realname}}<br />
-                    年龄:&nbsp;{{age}}&nbsp;岁<br />
-                    性别:{{sex}}<br />
-                    email:&nbsp;{{email}}</p>
+        <h3>个人信息</h3>
+        <div class="img"><img src={{img.url}} width="56" alt="" /></div>
+        <div class="self">
+          <p class="last">用户名：{{user}}<br />
+            年龄:&nbsp;{{age}}&nbsp;岁<br />
+            生日：{{year}}-{{month}}-{{day}}<br/>
+            性别：{{sex}}<br/>
+            电话：{{phone}}<br/>
+            邮箱：{{email}}<br/>
                 </div>
                 </div>
     <!-- /#left part of web - main content -->
