@@ -51,10 +51,10 @@
 	  <a href={{url}}>返回</a>
       <form action="{% url 'private_edit' d_id%}" method="post">
 {% csrf_token %}
-      标题： <input type="text" name="fname" />
+      标题： <textarea rows="1" cols="15" style=" font-size:22px; resize:none" name="file1" >
 {{diary_title}}
 </textarea><br>
-<textarea rows="10" cols="40" style=" font-size:22px; resize:none" >
+<textarea rows="10" cols="40" style=" font-size:22px; resize:none" name= "file">
 {{content}}
 </textarea><br>
 公开?<input type="checkbox" value="1" name="check_box"/>
@@ -83,12 +83,13 @@
             邮箱：{{email}}<br/>
         </div></div>
       <div class="box subMenu">
-        <h3>个人设置:</h3>
-        <ul>
-          <li><a href='/private/setting/'>个人简介</a></li>
-          <li><a href='/private/setting/'>照片</a></li>
-          <li><a href='/private/setting/'>联系</a></li>
-        </ul>
+	              <h3>按日期查看:</h3>
+		<form action={% url 'private' 1%} method="post" id="view_by_date">
+			{% csrf_token %}
+          <ul>
+              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
+          </ul>
+		</form>
       </div>   
     </div>
     <!-- /#right part of web -->
