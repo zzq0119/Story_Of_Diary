@@ -155,6 +155,8 @@ def public_detail(request,d_id):
         if user.sex=="女":
             dist['sex']="女"
         return render(request,'public_detail.html',dist)
+    else:
+        return redirect('/')
 def private_detail(request,d_id):
     if 'u_id' in request.session and 'username' in request.session:
         u_id=request.session['u_id']
@@ -171,26 +173,38 @@ def private_detail(request,d_id):
     else:
         return redirect('/')
 def private_edit(request,d_id):
-    diary=get_object_or_404(Diary,id=d_id)
-    mess='私有'
-    if diary.public:
-        mess='公开'
-    if request.method=='POST':
-        if 'delete' in request.POST:
-            diary.delete()
-            return HttpResponseRedirect(reverse('private',args=(1,)))
-        if request.POST.get('check_box')=="1":
-            diary.public=True
-        else:
-            diary.public=False
-        diary.title=request.POST.get('file1')
-        diary.diary_text=request.POST.get('file')
-        diary.simp_text=diary.diary_text[:100]+'...'
-        diary.pub_date=datetime.datetime.today()
-        diary.save()
-        dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,))}
-        return render(request,'private_detail.html',dist)
-    return render(request,'private_edit.html',{'d_id':d_id,'diary_title':diary.title,'content':diary.diary_text,'mess':mess,'url':reverse('private_detail',args=(d_id,))})
+    if 'u_id' in request.session and 'username' in request.session:
+        u_id=request.session['u_id']
+        user=User.objects.get(id=u_id)
+        diary=Diary.objects.get(id=d_id)
+        diary=get_object_or_404(Diary,id=d_id)
+        mess='私有'
+        if diary.public:
+            mess='公开'
+        if request.method=='POST':
+            if 'delete' in request.POST:
+                diary.delete()
+                return HttpResponseRedirect(reverse('private',args=(1,)))
+            if request.POST.get('check_box')=="1":
+                diary.public=True
+            else:
+                diary.public=False
+            diary.title=request.POST.get('file1')
+            diary.diary_text=request.POST.get('file')
+            diary.simp_text=diary.diary_text[:100]+'...'
+            diary.pub_date=datetime.datetime.today()
+            diary.save()
+            dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,))}
+            return render(request,'private_detail.html',dist)
+        dist={'picture':user,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,
+                                               'd_id':d_id,'diary_title':diary.title,'content':diary.diary_text,'mess':mess,'url':reverse('private_detail',args=(d_id,))}
+        if user.sex=="男":
+            dist['sex']="男"
+        if user.sex=="女":
+            dist['sex']="女"
+        return render(request,'private_edit.html',dist)
+    else:
+        return redirect('/')
 def private_edit_new(request):
     if 'u_id' in request.session and 'username' in request.session:
         user_name=request.session['username']
@@ -206,6 +220,11 @@ def private_edit_new(request):
             diary.save()
             dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,))}
             return render(request,'private_detail.html',dist)
-        return render(request,'private_edit_new.html',{'url':reverse('private',args=(1,))})
+        dist={'url':reverse('private',args=(1,)),'picture':user,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email}
+        if user.sex=="男":
+            dist['sex']="男"
+        if user.sex=="女":
+            dist['sex']="女"
+        return render(request,'private_edit_new.html',dist)
     else:
         return redirect('/')
