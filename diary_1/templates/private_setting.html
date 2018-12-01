@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html>
 <head>
 <title>private_setting</title>
@@ -8,15 +9,10 @@
 
 <body  background="{% static 'images/bg.jpg'%}" style=" background-repeat:no-repeat ;background-size:100% 100%;background-attachment:fixed " >
 
-
-
 <form name="reg_testdate"method="POST" enctype="multipart/form-data" style="height : 600px; width:500px;margin: auto;">
-
 <img src='{{ img.img.url }}' height="100" width="80">
-<input type="file" name="img">
 {% csrf_token %}
-
-
+<input type="file" name="img" accept="image/*">
 <br>
 <hr>
 
@@ -110,7 +106,7 @@
 
 <br><br>
 <button type="submit">保存</button>
-<button type="button" a href={{back}}>返回<a>
+<a href='/private/page/1'><button type="button">返回</button></a>
 <br>
 
 

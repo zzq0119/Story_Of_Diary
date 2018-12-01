@@ -116,7 +116,9 @@ def private_setting(request):
     if 'u_id' in request.session and 'username' in request.session:
         u_id=request.session['u_id']
         user=User.objects.get(id=u_id)
-        content={'back':reverse('private',args=(1,)),'img':user}
+        content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':'女','date':user.birthday,'phone':user.telephone}
+        if user.sex:
+            content={'back':reverse('private',args=(1,)),'img':user.img,'name':user.realname,'sex':'男','date':user.birthday,'phone':user.telephone}
         if request.method=="POST":
             if request.FILES.get("img"):
                 user.img=request.FILES.get("img")
