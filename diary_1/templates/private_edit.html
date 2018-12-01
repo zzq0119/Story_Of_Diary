@@ -51,10 +51,10 @@
 	  <a href={{url}}>返回</a>
       <form action="{% url 'private_edit' d_id%}" method="post">
 {% csrf_token %}
-      标题： <textarea rows="1" cols="15" style=" font-size:22px; resize:none" name="file1" >
+      标题： <textarea rows="1" cols="15" style=" font-size:22px; resize:none" name="title" >
 {{diary_title}}
 </textarea><br>
-<textarea rows="10" cols="40" style=" font-size:22px; resize:none" name= "file">
+<textarea rows="10" cols="40" style=" font-size:22px; resize:none" name= "content">
 {{content}}
 </textarea><br>
 公开?<input type="checkbox" value="1" name="check_box"/>
