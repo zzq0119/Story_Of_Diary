@@ -89,17 +89,7 @@
           <li><a href='/private/setting/'>照片</a></li>
           <li><a href='/private/setting/'>联系</a></li>
         </ul>
-      </div>
-      <div class="box subMenu">
-            <h3>查看:</h3>
-           <form action={% url 'private' 1%} method="post">
-			{% csrf_token %}
-          <ul>
-              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
-          </ul>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" value="确定"/> 
-		  </form>
-      </div>    
+      </div>   
     </div>
     <!-- /#right part of web -->
   </div>
