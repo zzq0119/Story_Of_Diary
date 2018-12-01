@@ -18,8 +18,8 @@
   <div id="head">
     <!-- main headings with search component -->
     <div id="main">
-      <h1>日记故事</a></h1>
-      <h2>test version</a></h2>
+      <h1>日记故事</h1>
+      <h2>test version</h2>
       <form action="" method="post" id="search">
         <fieldset>
             <h2>已登录：{{user_name}}</h2>
@@ -32,11 +32,11 @@
     <!-- main horizontal menu -->
     <div id="mainMenu">
       <ul>
-        <li><a href='/public/page/1'>日记社区<span></span></a></li>
-        <li class="active"><a href='/private/page/1'>个人主页<span></span></a></li>
-        <!--li class="fr"><a href="http://www.baidu.com">关于<span></span></a></li-->
-        <!--li class="fr"><a href="http://www.baidu.com">获取帮助<span></span></a></li-->
-        <li class="fr"><a href='/private/setting/'>设置<span></span></a></li>
+           <li><a href="/public/page/1"><font size=3>日记社区<span></span></font></a></li>
+        <li class="active"><a href="/private/page/1"><font size=3>个人主页<span></span></font></a></li>
+        <li class="fr"><a href="/help"><font size=3>获取帮助<span></span></font></a></li>
+        <li class="fr"><a href="/private/setting"><font size=3>个人设置<span</span></font></a></li>
+        <li class="fr"><a href="/private/edit/new"><font size=3>新建<span></span></font></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
@@ -47,40 +47,38 @@
   </div>
   <!-- /#header (main heading + logo with slogan) -->
   <!-- #main content construct -->
+
   <div id="content">
-    <!-- #left part of web - main content -->
-    <div id="contentBlock">
-      <!-- #cols 50:50 -->
+        <div style="position:relative;top:20px">
+            <h3 align="center">帮助文档</h3>
+        </div>
+    <textarea rows="40" cols="93" style=" font-size:10pt;font-family:verdana;color:#333333;background-color:white; resize:none;border:none" >
 
-      <textarea rows="40" cols="103" style=" font-size:9pt;font-family:verdana;color:#333333;background-color:white; resize:none" >
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~使用指南~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                                                                                                                                                 by 软工小组
-                                                        使用 项目-日记故事 来与他人分享生活中的点滴
 
-您是新用户？
-	完成注册以获取您的账号，返回登陆界面，键入用户名和密码以登陆。
 
-让更多用户认识您：
-	点击个人信息，完善您的资料并上传一张图片，可以让天南海北的人更容易记住您。
 
-编辑您的第一份日记：
-	点击新建->输入日记主题和内容->选择是否公开*->点击保存，至此，您的第一份日记便成功保存，并随时可以再次查看。
-（*关于公开：公开的日记将会设置成为在公共区可见，您可以查看其他人公开的日记并对其内容进行评论，同时，您公开的日记也会对其他人开放阅读和评论的权限。）
 
-回顾以往的日记：
-	如果您在此之前已经保存过日记，那么进入个人中心->选择您想要回顾的日记->点击进入，即可查阅之前的日记。
+         让更多用户认识您：
+	    点击个人信息，完善您的资料并上传一张图片，可以让天南海北的人更容易记住您。
 
-仍然有问题或对项目有任何建议和意见：
-	请点击主页面“联系我们”以获取更加细致的帮助或提出您的宝贵意见，感谢您的支持。
+
+          编辑您的日记：
+	    点击新建->输入日记主题和内容->选择是否公开->点击保存，至此，您的第一份日记便成功保存，随时可再次查看。
+            公开的日记将会设置成为在公共区可见并允许他人评论，当然，您可以查看其他人公开的日记并对其内容进行评论。
+
+
+          回顾以往的日记：
+	    如果您在此之前已经保存过日记，那么进入个人中心->选择您想要回顾的日记->点击进入，即可查阅之前的日记。
+
+
+          任何建议和意见：
+	    请点击主页面“联系我们”以获取更加细致的帮助或提出您的宝贵意见，感谢您的支持。
 
 
 
 
 
       </textarea>
-
-
-    </div>
 
   </div>
   <!-- /#main content construct -->
