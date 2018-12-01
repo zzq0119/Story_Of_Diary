@@ -15,7 +15,7 @@ input
 select,
 textarea      { font-family: Arial, lucida, sans-serif; font-size: 1em; vertical-align: middle; }
 input, 
-textarea	    { background: #044979; padding: 2px 0; margin: 0; border: 1px solid #1776a4; color: #cde2f0; }
+textarea	    { background:#FBFBFF; padding: 2px 0; margin: 0; border: 1px solid #1776a4; color:#3C3C3C; }
 button	      { vertical-align: middle; margin: 0; padding: 0; height: 18px; border: none; text-decoration: underline; font-weight: bold; color: #00CCFF; cursor: pointer; }
 .submit       { width: auto !important; overflow: visible; background-color: #312b2a; border: 1px solid #000 !important; padding: 0 5px; color: #fff; font-weight: bold; cursor: pointer; }
 
