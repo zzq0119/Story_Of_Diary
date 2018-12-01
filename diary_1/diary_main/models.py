@@ -21,6 +21,7 @@ class Diary(models.Model):
     pub_date = models.DateTimeField('date published')
     title=models.CharField(max_length=50)
     public=models.BooleanField(default=False)
+    praise=models.IntegerField(default=0)
     def __str__(self):
         return self.simp_text
     def __iter__(self):

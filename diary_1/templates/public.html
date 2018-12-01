@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
 <head>   
 <meta charset="utf-8">
 <meta http-equiv="content-type" content="text/html" />
@@ -33,7 +32,6 @@
       <ul>
         <li><a href={{public}}>日记社区<span></span></a></li>
         <li class="active"><a href={{private}}>个人主页<span></span></a></li>
-        <li class="fr">关于<span></span></a></li>
         <li class="fr"><a href="http://www.baidu.com">获取帮助<span></span></a></li>
       </ul>
     </div>
@@ -41,7 +39,7 @@
     <hr class="hidden" />
     <!-- logo with slogan -->
     <div id="logo"> <class="block">&nbsp;</a>
-      <h2>分享你的故事</h2>
+      <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分享你的故事</h2>
     </div>
     <!-- /logo with slogan -->
     <hr class="hidden" />
@@ -55,7 +53,12 @@
       <div class="item mainItem">
         <h2>{{diary1.title}}</h2>
         <p class="info"><span class="date">{{diary1.pub_date}}</span></p>
-        <p class="perex">{{diary1.simp_text}}</p>{% if url1 %}<a href={{url1}}>完整</a>{% endif %}
+        <p class="perex">{{diary1.simp_text}}</p>{% if url1 %}<a href={{url1}}>完整</a>
+	      <form action="{% url 'public' page%}" method="post">
+			{% csrf_token %}
+			<input type="submit" value="赞{{diary1.praise}}" name="1"/>
+		</form>
+	      {% endif %}
       </div>
       <!-- /#first (main) article -->
       <!-- #cols 50:50 -->
@@ -63,27 +66,52 @@
         <div class="item itemOdd">
           <h3>{{diary2.title}}</h3>
           <p class="perex">{{diary2.simp_text}}</p>
-          <p class="info"><span class="date">{{diary2.pub_date}}</span></p>{% if url2 %}<a href={{url2}}>完整</a>{% endif %}
+          <p class="info"><span class="date">{{diary2.pub_date}}</span></p>{% if url2 %}<a href={{url2}}>完整</a>
+		<form action="{% url 'public' page%}" method="post">
+			{% csrf_token %}
+			<input type="submit" value="赞{{diary2.praise}}" name="2"/>
+		  </form>
+		{% endif %}
         </div>
         <div class="item itemEven">
           <h3>{{diary3.title}}</h3>
           <p class="perex">{{diary3.simp_text}}</p>
-          <p class="info"><span class="date">{{diary3.pub_date}}</span></p>{% if url3 %}<a href={{url3}}>完整</a>{% endif %}
+          <p class="info"><span class="date">{{diary3.pub_date}}</span></p>{% if url3 %}<a href={{url3}}>完整</a>
+		<form action="{% url 'public' page%}" method="post">
+			{% csrf_token %}
+			<input type="submit" value="赞{{diary3.praise}}" name="3"/>
+		  </form>
+		{% endif %}
         </div>
         <div class="item itemOdd last">
           <h3>{{diary4.title}}</h3>
           <p class="perex">{{diary4.simp_text}}</p>
-          <p class="info"><span class="date">{{diary4.pub_date}}</span></p>{% if url4 %}<a href={{url4}}>完整</a>{% endif %}
+          <p class="info"><span class="date">{{diary4.pub_date}}</span></p>{% if url4 %}<a href={{url4}}>完整</a>
+		<form action="{% url 'public' page%}" method="post">
+			{% csrf_token %}
+			<input type="submit" value="赞{{diary4.praise}}" name="4"/>
+		  </form>
+		{% endif %}
         </div>
 		<div class="item itemEven">
           <h3>{{diary5.title}}</h3>
           <p class="perex">{{diary5.simp_text}}</p>
-          <p class="info"><span class="date">{{diary5.pub_date}}</span></p>{% if url5 %}<a href={{url5}}>完整</a>{% endif %}
+          <p class="info"><span class="date">{{diary5.pub_date}}</span></p>{% if url5 %}<a href={{url5}}>完整</a>
+			<form action="{% url 'public' page%}" method="post">
+			{% csrf_token %}
+			<input type="submit" value="赞{{diary5.praise}}" name="5"/>
+		  	</form>
+			{% endif %}
         </div>
         <div class="item itemOdd last">
           <h3>{{diary6.title}}</h3>
           <p class="perex">{{diary6.simp_text}}</p>
-          <p class="info"><span class="date">{{diary6.pub_date}}</span></p>{% if url6 %}<a href={{url6}}>完整</a>{% endif %}
+          <p class="info"><span class="date">{{diary6.pub_date}}</span></p>{% if url6 %}<a href={{url6}}>完整</a>
+		<form action="{% url 'public' page%}" method="post">
+			{% csrf_token %}
+			<input type="submit" value="赞{{diary6.praise}}" name="6"/>
+		  </form>
+		{% endif %}
         </div>
         <div class="col2">
         </div><!-- /#cols 50:50 -->
@@ -118,13 +146,13 @@
       </div>
       <div class="box subMenu">
         <h3>按日期查看:</h3>
-	<form action=/private/page/1/ method="post">
-	<input type="hidden" name="csrfmiddlewaretoken" value="uvPPSeopTupJPZgaf4k0EUM06JRv3HoHLQC8RNM03clVEkl61Pkg05B6cmKXrLpz">
+	<form action={% url 'private' 1%} method="post">
+	    {% csrf_token %}
          <ul>
-           <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
+             <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
          </ul>
-	 <input type="submit" value="确定"/> 
-	</form>
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" value="确定"/> 
+	 </form>
       </div>
     </div>
     <!-- /#right part of web -->
