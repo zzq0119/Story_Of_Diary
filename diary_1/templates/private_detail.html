@@ -1,4 +1,4 @@
-<!DOCTYPE html">
+﻿<!DOCTYPE html">
 
 {% load static %}
 <head>
@@ -67,10 +67,11 @@ color:black;
         <p class="info"><font size="3">标题 :{{title}}</font></p>
         <p class="info"><span class="date">上传日期：{{pub_date}}</span></p>
 	<pre><p class="perex"><font size="3">{{text}}</font></p></pre>	
-      <button title="click to read" style="border:1px solid;"><a href={{url}}>编辑日记</a></button>
+      <button title="click to read"  style="width:100px;height:25px;line-height:18px;font-size:18px;border-radius: 3px; background: #FAEBD7;color: white;border-width: 0px; cursor: pointer; "><a href={{url}}>编辑日记</a></button>
+
 	 <form action="{% url 'private_detail' d_id%}" method="post">
 	  {%csrf_token%}
-	<input type="submit" value="删除" title="click to read" style="border:1px solid;">
+	<input type="submit" value="删除" title="click to read" style="width:100px;height:25px;line-height:18px;font-size:18px;border-radius: 3px; background: #C0C0C0;color: white;border-width: 0px; cursor: pointer; " >
 	</form>
 	  </div>
   <!-- /#main content construct -->
