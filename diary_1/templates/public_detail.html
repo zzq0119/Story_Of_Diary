@@ -29,7 +29,7 @@ color:black;
             <h1>日记故事</a></h1>
             <h2>test version</a></h2>   
             <div id="search">   
-	      <h2 style="color:black;">已登录：{{user_name}}</h2> 
+	      <h2 style="color:black;">已登录：{{name}}</h2> 
                 <li><a href="/private/signOut">注销</a></li>
                 </div>
     </div>
@@ -92,16 +92,15 @@ color:black;
             邮箱：{{email}}<br/>
                 </div>
                 </div>
-    <!-- /#left part of web - main content -->
-    <hr class="hidden" />
-    <!-- #right part of web - submenu boxes with simple text -->
       <div class="box subMenu">
-        <li><font size="4">目录:</font></li>
-	{% for i in list%}
-	<ul>
-	<li><a href="{%url 'public_detail' i.id%}">{{i.title}}</a></li>
-	</ul>
-	{%endfor%}
+        <h3>按日期查看:</h3>
+		<form action={% url 'private' 1%} method="post" id="view_by_date">
+			{% csrf_token %}
+          <ul>
+              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
+          </ul>
+		</form>
+      </div>
     </div>
     <!-- /#right part of web -->
   </div>
