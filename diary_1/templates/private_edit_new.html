@@ -31,7 +31,7 @@ function check_form(){
       <h1>日记故事</a></h1>
       <h2>test version</a></h2>
       <div id="search">
-      <h2>已登录：{{user_name}}</h2> 
+      <h2>已登录：{{name}}</h2> 
       <h2><a href="/private/signOut">注销</a></h2>
     </div>
     </div>
@@ -43,7 +43,7 @@ function check_form(){
         <li><a href={{public}}><font size=3>日记广场<span></span></font></a></li>
         <li class="active"><a href={{private}}><font size=3>个人主页<span></span></font></a></li>
         <li><a href={{new}}><font size=3>写日记<span></span></font></a></li>
-        <li class="fr"><a href={{setting}}><font size=3>个人设置<span</span></font></a></li>
+        <li class="fr"><a href={{setting}}><font size=3>个人设置<span></span></font></a></li>
         <li class="fr"><a href="/help"><font size=3>获取帮助<span></span></font></a></li>
       </ul>
     </div>
@@ -95,7 +95,15 @@ function check_form(){
             邮箱：{{email}}<br/>
         </div>
       </div>
-      
+            <div class="box subMenu">
+        <h3>按日期查看:</h3>
+		<form action={% url 'private' 1%} method="post" id="view_by_date">
+			{% csrf_token %}
+          <ul>
+              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
+          </ul>
+		</form>
+      </div>
     </div>
     <!-- /#right part of web -->
   </div>
