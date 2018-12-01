@@ -30,7 +30,7 @@ function check_form(){
     <div id="main">
       <h1>日记故事</a></h1>
       <h2>test version</a></h2>
-      <div id="signout">
+      <div id="search">
       <h2>已登录：{{user_name}}</h2> 
       <h2><a href="/private/signOut">注销</a></h2>
     </div>
@@ -61,8 +61,9 @@ function check_form(){
       <!-- #cols 50:50 -->
     <form action="/private/edit/new/" method="post" id="new_diary">
       {% csrf_token %} 
-      标题： <input type="text" name="title" id="title"/>
-      <textarea rows="10" cols="40" style=" font-size:22px; resize:none" name="content" id="content"></textarea>
+       <input type="text" name="title" id="title" style="width:500px;" placeholder="请输入标题"/><hr>
+	
+      <textarea rows="10" cols="40" style=" font-size:22px; resize:none" name="content" id="content"></textarea><hr>
       <ul>  
         是否公开？
         <label><input name="public" type="checkbox" value="" />是 </label> 
@@ -94,15 +95,7 @@ function check_form(){
             邮箱：{{email}}<br/>
         </div>
       </div>
-      <div class="box subMenu">
-                  <h3>按日期查看:</h3>
-		<form action={% url 'private' 1%} method="post" id="view_by_date">
-			{% csrf_token %}
-          <ul>
-              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
-          </ul>
-		</form>
-      </div> 
+      
     </div>
     <!-- /#right part of web -->
   </div>

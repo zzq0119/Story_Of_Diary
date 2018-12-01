@@ -462,11 +462,11 @@ Calendar.prototype.bindData = function () {
             tds[i].onclick = function () {
                 if(calendar.DateMode == pickMode["day"]) //2009-03-03 当选择日期时，点击格子即返回值
                 {
-                    var view_form=document.getElementById("view_by_date");
-                    view_form.submit();
+                  
                     calendar.ReturnDate(new Date(calendar.date.getFullYear(),
                         calendar.date.getMonth(),
                         this.innerHTML).format(calendar.dateFormatStyle));
+                  
                 }
                 else
                 {
@@ -478,6 +478,7 @@ Calendar.prototype.bindData = function () {
                     calendar.day = this.innerHTML;
                     calendar.selectedDayTD = this; //2009-03-03 记录已选中的日子
                 }
+                document.getElementById("view_by_date").submit();
             }
             tds[i].style.cursor ="pointer";
             tds[i].onmouseover = function () {
