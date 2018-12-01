@@ -285,7 +285,6 @@ def private_edit(request,d_id):
             dist['phone']=user.telephone
             dist['email']=user.email
             return redirect('/private/page/1')
-            return render(request,'private_detail.html',dist)
         dist={'picture':user,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,
                                                'd_id':d_id,'diary_title':diary.title,'content':diary.diary_text,'mess':mess,'url':reverse('private_detail',args=(d_id,)),'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
         dist['setting']=reverse('private_setting')
