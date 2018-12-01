@@ -66,7 +66,7 @@ color:black;
 	<p class="info"><font size="5">我的日记</font></p>	
         <p class="info"><font size="3">标题 :{{title}}</font></p>
         <p class="info"><span class="date">上传日期：{{pub_date}}</span></p>
-	<p class="perex"><font size="3">{{text}}</font></p>	
+	<pre><p class="perex"><font size="3">{{text}}</font></p></pre>	
       <button title="click to read" style="border:1px solid;"><a href={{url}}>编辑日记</a></button>
 	 <form action="{% url 'private_detail' d_id%}" method="post">
 	  {%csrf_token%}
