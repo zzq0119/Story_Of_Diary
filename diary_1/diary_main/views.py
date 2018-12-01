@@ -39,6 +39,9 @@ def index(request):
         
 def signUp(request):
     return render(request,'signUpSuccess.html')
+
+def help(request):
+    return render(request,'help.html')
     
 def signOut(request):
     if request.session:
