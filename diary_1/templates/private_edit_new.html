@@ -10,7 +10,17 @@
 <title>Story of diary</title>
 <link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" media="screen" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print" />
-<script src="{% static 'datePlugin.js' %}"></script>
+<script>
+function check_form(){
+    var title=document.getElementById("title");
+    var content=document.getElementById("content");
+    if(title.value=='' || content.value=='')alert("标题和内容不能为空");
+    else {
+        var form=document.getElementById("new_diary");
+        form.submit();
+    }
+}
+</script>
 </head>
 <body>
 <div id="view">
@@ -20,23 +30,21 @@
     <div id="main">
       <h1>日记故事</a></h1>
       <h2>test version</a></h2>
-      <form action="" method="post" id="search">
-        <fieldset>
-            <h2>已登录：{{user_name}}</h2> 
-            <h2><a href="/private/signOut">注销</a></h2>
-        </fieldset>
-      </form>
+      <div id="search">
+      <h2>已登录：{{user_name}}</h2> 
+      <h2><a href="/private/signOut">注销</a></h2>
+    </div>
     </div>
     <!-- /main headings with search component -->
     <hr class="hidden" />
     <!-- main horizontal menu -->
     <div id="mainMenu">
       <ul>
-        <li><a href="http://www.baidu.com">日记社区<span></span></a></li>
-        <li class="active"><a href="#content">个人主页<span></span></a></li>
-        <!--li class="fr"><a href="http://www.baidu.com">关于<span></span></a></li-->
-        <!--li class="fr"><a href="http://www.baidu.com">获取帮助<span></span></a></li-->
-        <li class="fr"><a href='private/setting/'>设置<span></span></a></li>
+        <li><a href={{public}}><font size=3>日记广场<span></span></font></a></li>
+        <li class="active"><a href={{private}}><font size=3>个人主页<span></span></font></a></li>
+        <li><a href={{new}}><font size=3>写日记<span></span></font></a></li>
+        <li class="fr"><a href={{setting}}><font size=3>个人设置<span</span></font></a></li>
+        <li class="fr"><a href="/help"><font size=3>获取帮助<span></span></font></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
@@ -51,22 +59,21 @@
     <!-- #left part of web - main content -->
     <div id="contentBlock">
       <!-- #cols 50:50 -->
-<form action="form_action.asp" method="get">
-            标题： <input type="text" name="fname" />
-          </form>
-      <textarea rows="10" cols="40" style=" font-size:22px; resize:none" >
-      </textarea>
-      <ul>
-     <form action="" method="get"> 
+    <form action="/private/edit/new/" method="post" id="new_diary">
+      {% csrf_token %} 
+      标题： <input type="text" name="title" id="title"/>
+      <textarea rows="10" cols="40" style=" font-size:22px; resize:none" name="content" id="content"></textarea>
+      <ul>  
         是否公开？
-        <label><input name="Fruit" type="radio" value="" />是 </label> 
-        <label><input name="Fruit" type="radio" value="" />否 </label> 
+        <label><input name="public" type="checkbox" value="" />是 </label> 
+        <!--label><input name="check_box" type="radio" value="" checked="true"/>否 </label--> 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-      <input type="button" value="保存" style="color:#000000;background:#d6d4d1;">
+      <input type="button" value="保存" style="color:#000000;background:#d6d4d1;" onclick="check_form()">
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-      <input type="button" value="取消编辑" style="color:#000000;background:#d6d4d1;"> 
-</form>
+      <a href="/private/page/1"><input type="button" value="取消编辑" style="color:#000000;background:#d6d4d1;"> </a>
+
       </ul>
+    </form>
       <div class="col2">
         </a> </div>
       <!-- /#cols 50:50 -->
@@ -76,29 +83,26 @@
     <!-- #right part of web - submenu boxes with simple text -->
     <div id="menuBlock">
       <div class="box boxText firstBox">
-        <h3>我的信息</h3>
-        <div class="img"><img src={{picture.img.url}} width="56" alt="" /></div>
+        <h3>个人信息</h3>
+        <div class="img"><img src={{img.url}} width="56" alt="" /></div>
         <div class="self">
-          <p class="last">昵称:{{realname}}<br />
+          <p class="last">用户名：{{user}}<br />
             年龄:&nbsp;{{age}}&nbsp;岁<br />
-            性别:{{sex}}<br />
-            email:&nbsp;{{email}}</p>
+            生日：{{year}}-{{month}}-{{day}}<br/>
+            性别：{{sex}}<br/>
+            电话：{{phone}}<br/>
+            邮箱：{{email}}<br/>
         </div>
       </div>
       <div class="box subMenu">
-        <h3>个人设置:</h3>
-        <ul>
-          <li><a href='private/setting/'>个人简介</a></li>
-          <li><a href='private/setting/'>照片</a></li>
-          <li><a href='private/setting/'>联系</a></li>
-        </ul>
-      </div>
-      <div class="box subMenu">
-            <h3>查看:</h3>
-            <ul>
-               <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text">
-            </ul>
-      </div>    
+                  <h3>按日期查看:</h3>
+		<form action={% url 'private' 1%} method="post" id="view_by_date">
+			{% csrf_token %}
+          <ul>
+              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
+          </ul>
+		</form>
+      </div> 
     </div>
     <!-- /#right part of web -->
   </div>

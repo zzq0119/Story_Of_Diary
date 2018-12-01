@@ -50,6 +50,7 @@ function SelectDate(obj,strFormat,x,y)
     cal.dateFormatStyleOld = cal.dateFormatStyle;
     cal.dateFormatStyle = strFormat;
     cal.show(obj);
+    
 }
 /**//**//**//**//**//**//**//**
  * 返回日期
@@ -461,6 +462,8 @@ Calendar.prototype.bindData = function () {
             tds[i].onclick = function () {
                 if(calendar.DateMode == pickMode["day"]) //2009-03-03 当选择日期时，点击格子即返回值
                 {
+                    var view_form=document.getElementById("view_by_date");
+                    view_form.submit();
                     calendar.ReturnDate(new Date(calendar.date.getFullYear(),
                         calendar.date.getMonth(),
                         this.innerHTML).format(calendar.dateFormatStyle));

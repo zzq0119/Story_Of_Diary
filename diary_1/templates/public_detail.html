@@ -1,11 +1,7 @@
 <!DOCTYPE html">
 {% load static %}
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-<title>DeepBlue - by www.865171.cn</title>
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/default.css'%}" media="screen" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/print.css'%}" media="print" />
@@ -29,44 +25,31 @@ color:black;
   <!-- #header (main heading + logo with slogan) -->
   <div id="head">
     <!-- main headings with search component -->
-    <div id="main">
-       <div class="box boxText firstBox">
-        <h3>æˆ‘çš„ä¿¡æ¯</h3>
-        <div class="img"><img src={{picture.img.url}} width="56" alt="" /></div>
-        <div class="self">
-          <p class="last">æ˜µç§°:{{realname}}<br />
-            å¹´é¾„:&nbsp;{{age}}&nbsp;å²?br />
-            æ€§åˆ«:{{sex}}<br />
-            email:&nbsp;{{email}}</p>
-        </div>
-    </div>
-    <p class="info"><font size="5">'</font></p> 
-    <p class="info"><font size="5">'</font></p>
-    <p class="info"><font size="5">'</font></p>
-      <form action="" method="post" id="search">
-        <fieldset>
-	<h2 style="color:black;">å·²ç™»å½•ï¼š{{user_name}}</h2> 
-                <li><a href="/private/signOut">æ³¨é”€</a></li>
-        </fieldset>
-      </form>
+<div id="main">
+            <h1>日记故事</a></h1>
+            <h2>test version</a></h2>   
+            <div id="search">   
+	      <h2 style="color:black;">已登录：{{user_name}}</h2> 
+                <li><a href="/private/signOut">注销</a></li>
+                </div>
     </div>
     <!-- /main headings with search component -->
     <hr class="hidden" />
     <!-- main horizontal menu -->
     <div id="mainMenu">
       <ul>
-
-        <li><a href={%url 'private_edit_new'%}>å†™æ—¥è®°</a></li>
-        <li ><a href={%url 'public' 1%}>æ—¥è®°å¹¿åœº</a></li>
-        <li><a href={%url 'private_setting'%}>ä¸ªäººè®¾ç½®</a></li>
-
+        <li><a href={{public}}><font size=3>日记广场<span></span></font></a></li>
+        <li class="active"><a href={{private}}><font size=3>个人主页<span></span></font></a></li>
+        <li><a href={{new}}><font size=3>写日记<span></span></font></a></li>
+        <li class="fr"><a href={{setting}}><font size=3>个人设置<span</span></font></a></li>
+        <li class="fr"><a href="/help"><font size=3>获取帮助<span></span></font></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
     <hr class="hidden" />
     <!-- logo with slogan -->
     <div id="logo">
-      <h2 style="color:black; text-align: center;">è¿™é‡Œæœ‰ä¸€å¥å£å?/h2>
+      <h2 style="color:black; text-align: center;">分享你的故事</h2>
     </div>
     <!-- /logo with slogan -->
     <hr class="hidden" />
@@ -78,12 +61,11 @@ color:black;
     <div id="contentBlock">
       <!-- #first (main) article -->
       <div class="item mainItem">
-	<p class="info"><font size="5">æ—¥è®°å¹¿åœº</font></p>	
-        <p class="info">æ—¥è®° :{{title}}</p>
-
-	<p class="info">ä½œè€…{{author}}</p>
-
-        <p class="info"><span class="date">å‘å¸ƒæ—¥æœŸï¼š{{pub_date}}</span></p>
+	<p class="info"><font size="5">日记广场</font></p>	
+        <p class="info">日记 :{{title}}</p>
+	<p class="info">作者{{author}}</p>
+	<p class="info">赞{{praise}}</p>
+        <p class="info"><span class="date">发布日期：{{pub_date}}</span></p>
 	<p class="perex"><font size="3">{{text}}</font></p>
       
       </div>
@@ -98,11 +80,23 @@ color:black;
   <!-- /#accessible components -->
 </div>
 <div id="menuBlock">
+	<div class="box boxText firstBox">
+        <h3>个人信息</h3>
+        <div class="img"><img src={{img.url}} width="56" alt="" /></div>
+        <div class="self">
+          <p class="last">用户名：{{user}}<br />
+            年龄:&nbsp;{{age}}&nbsp;岁<br />
+            生日：{{year}}-{{month}}-{{day}}<br/>
+            性别：{{sex}}<br/>
+            电话：{{phone}}<br/>
+            邮箱：{{email}}<br/>
+                </div>
+                </div>
     <!-- /#left part of web - main content -->
     <hr class="hidden" />
     <!-- #right part of web - submenu boxes with simple text -->
       <div class="box subMenu">
-        <li><font size="4">ç›®å½•:</font></li>
+        <li><font size="4">目录:</font></li>
 	{% for i in list%}
 	<ul>
 	<li><a href="{%url 'public_detail' i.id%}">{{i.title}}</a></li>
@@ -111,12 +105,14 @@ color:black;
     </div>
     <!-- /#right part of web -->
   </div>
-<!-- #footer -->
+  <!-- #footer -->
   <div id="foot">
     <p class="fl">&copy; all rights reserved</p>
     <!-- /#   LINKS AND AUTHOR-SIGNATURE CANNOT BE REMOVED !!! -->
-    <p class="fr">created by&nbsp;<a href="http://www.baidu.cn" class="ico ico-breezy">www.baidu.cn</a></p>
+    <p class="fr">created by&nbsp;<a class="ico ico-breezy">软工小组</a></p>
   </div>
   <!-- /#footer -->
+</div>
 </body>
 </html>
+
