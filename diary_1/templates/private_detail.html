@@ -97,14 +97,6 @@ color:black;
     <!-- /#left part of web - main content -->
     <hr class="hidden" />
     <!-- #right part of web - submenu boxes with simple text -->
-      <div class="box subMenu">    
-        <li><font size="4">目录:</font></li>
-	{% for i in list%}
-	<ul>
-	<li><a href="{%url 'private_detail' i.id %}">{{i.title}}</a></li>
-	</ul>
-	{%endfor%}
-    </div>
     <!-- /#right part of web -->
   </div>
   <!-- #footer -->
