@@ -16,7 +16,7 @@ def index(request):
                 u_id=user.id
                 request.session['username'] = login_user
                 request.session['u_id'] = u_id
-                request.session.set_expiry(300)
+                request.session.set_expiry(3000)
                 return HttpResponseRedirect(reverse('private',args=(1,)))
             else:
                 return render(request,'index.html',{'error_mess':'Invalid Password.'})
@@ -214,12 +214,12 @@ def private_edit(request,d_id):
                 diary.public=True
             else:
                 diary.public=False
-            diary.title=request.POST.get('file1')
-            diary.diary_text=request.POST.get('file')
+            diary.title=request.POST.get('title')
+            diary.diary_text=request.POST.get('content')
             diary.simp_text=diary.diary_text[:100]+'...'
             diary.pub_date=datetime.datetime.today()
             diary.save()
-            dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,))}
+            dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,)),'d_id':d_id}
             return render(request,'private_detail.html',dist)
         dist={'picture':user,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,
                                                'd_id':d_id,'diary_title':diary.title,'content':diary.diary_text,'mess':mess,'url':reverse('private_detail',args=(d_id,)),'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
@@ -242,9 +242,9 @@ def private_edit_new(request):
             if request.POST.get('check_box')=="1":
                 diary.public=True
                 mess='public'
-            diary.save()
+            diary.save()          
+            dist={'back':reverse('private',args=(1,)),'title':diary.title,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,)),'d_id':diary.id}
             dist['setting']=reverse('private_setting')
-            dist={'back':reverse('private',args=(1,)),'title':diary.title,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,))}
             return render(request,'private_detail.html',dist)
         dist={'url':reverse('private',args=(1,)),'picture':user,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
         dist['setting']=reverse('private_setting')
