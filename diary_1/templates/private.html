@@ -118,13 +118,14 @@
         </ul>
       </div>
       <div class="box subMenu">
-          <h3>按日期查看:
-        </h3>
-		 <form action={% url 'private' 1%} method="post">
+        <h3>按日期查看:</h3>
+		<form action={% url 'private' 1%} method="post">
 			{% csrf_token %}
           <ul>
               <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
           </ul>
+		  <input type="submit" value="确定"/> 
+		</form>
       </div>
     </div>
     <!-- /#right part of web -->
