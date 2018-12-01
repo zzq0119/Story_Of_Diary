@@ -1,4 +1,4 @@
-<!DOCTYPE html">
+﻿<!DOCTYPE html">
 
 {% load static %}
 <head>
@@ -40,10 +40,10 @@ color:black;
     <!-- main horizontal menu -->
     <div id="mainMenu">
       <ul>
-        <li><a href={{public}}><font size=3>日记广场<span></span></font></a></li>
-        <li class="active"><a href={{private}}><font size=3>个人主页<span></span></font></a></li>
-        <li><a href={{new}}><font size=3>写日记<span></span></font></a></li>
-        <li class="fr"><a href={{setting}}><font size=3>个人设置<span</span></font></a></li>
+        <li><a href="/public/page/1"><font size=3>日记广场<span></span></font></a></li>
+        <li class="active"><a href="/private/page/1"><font size=3>个人主页<span></span></font></a></li>
+        <li><a href="/private/edit/new/"><font size=3>写日记<span></span></font></a></li>
+        <li class="fr"><a href="/private/setting"><font size=3>个人设置<span</span></font></a></li>
         <li class="fr"><a href="/help"><font size=3>获取帮助<span></span></font></a></li>
       </ul>
     </div>
@@ -51,7 +51,6 @@ color:black;
     <hr class="hidden" />
     <!-- logo with slogan -->
     <div id="logo">
-      <h2 style="color:black; text-align: center;">分享你的故事</h2>
     </div>
     <!-- /logo with slogan -->
     <hr class="hidden" />
@@ -67,10 +66,11 @@ color:black;
         <p class="info"><font size="3">标题 :{{title}}</font></p>
         <p class="info"><span class="date">上传日期：{{pub_date}}</span></p>
 	<pre><p class="perex"><font size="3">{{text}}</font></p></pre>	
-      <button title="click to read" style="border:1px solid;"><a href={{url}}>编辑日记</a></button>
+      <button title="click to read"  style="width:100px;height:25px;line-height:18px;font-size:18px;border-radius: 3px; background: #FAEBD7;color: white;border-width: 0px; cursor: pointer; "><a href={{url}}>编辑日记</a></button>
+
 	 <form action="{% url 'private_detail' d_id%}" method="post">
 	  {%csrf_token%}
-	<input type="submit" value="删除" title="click to read" style="border:1px solid;">
+	<input type="submit" value="删除" title="click to read" style="width:100px;height:25px;line-height:18px;font-size:18px;border-radius: 3px; background: #C0C0C0;color: white;border-width: 0px; cursor: pointer; " >
 	</form>
 	  </div>
   <!-- /#main content construct -->
@@ -97,15 +97,7 @@ color:black;
     <!-- /#left part of web - main content -->
     <hr class="hidden" />
     <!-- #right part of web - submenu boxes with simple text -->
-      <div class="box subMenu">    
-        <h3>按日期查看:</h3>
-	<form action={% url 'private' 1%} method="post" id="view_by_date">
-	{% csrf_token %}
-          <ul>
-              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
-          </ul>
-		</form>
-      </div>
+      
     </div>
     <!-- /#right part of web -->
   </div>

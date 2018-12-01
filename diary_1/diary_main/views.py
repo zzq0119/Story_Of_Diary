@@ -79,6 +79,11 @@ def public(request,page):
         for i in range(len(diary_list)):
             dist['diary'+str(i+1)]=diary_list[i]
             dist['url'+str(i+1)]=reverse('public_detail',args=(diary_list[i].id,))
+        if request.method=="POST":
+            for i in range(len(diary_list)):
+                if str(i+1) in request.POST:
+                    dist['diary'+str(i+1)].praise+=1
+                    dist['diary'+str(i+1)].save()
         dist['name']=user.realname
         dist['age']=datetime.datetime.today().year-User.objects.get(id=u_id).birthday.year
         dist['public']=reverse('public',args=(1,))
@@ -211,7 +216,12 @@ def private_detail(request,d_id):
     if 'u_id' in request.session and 'username' in request.session:
         u_id=request.session['u_id']
         user=User.objects.get(id=u_id)
-        diary=Diary.objects.get(id=d_id)
+        try:
+            diary=Diary.objects.get(id=d_id)
+        except(Diary.DoesNotExist):
+            dist={'back':reverse('private',args=(1,)),'piture':user,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,
+              'user_name':user.username,'url':reverse('private_edit',args=(d_id,)),'email':user.email,'d_id':d_id}
+            return render(request,'private_detail.html',dist)
         if request.method=="POST":
             diary.delete()
             return HttpResponseRedirect(reverse('private',args=(1,)))
@@ -314,7 +324,7 @@ def private_edit_new(request):
             dist['img']=user.img
             dist['setting']=reverse('private_setting')
             return redirect('/private/page/1')
-        dist={'url':reverse('private',args=(1,)),'picture':user,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'d_id':diary.id,'private':reverse('private',args=(1,))}
+        dist={'url':reverse('private',args=(1,)),'picture':user,'year':user.birthday.year,'month':user.birthday.month,'day':user.birthday.day,'phone':user.telephone,'email':user.email,'name':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
         dist['setting']=reverse('private_setting')
         dist['img']=user.img
         dist['help']=reverse('help')
