@@ -18,8 +18,8 @@
   <div id="head">
     <!-- main headings with search component -->
 	<div id="main">
-      <h1>日记故事</a></h1>
-      <h2>test version</a></h2>
+      <h1>日记故事</h1>
+      <h2>test version</h2>
       <form action="" method="post" id="search">
         <fieldset>
             <h2>已登录：{{user_name}}</h2> 
@@ -53,42 +53,42 @@
           <h3>按日期查看:
           <a href={{new}}><input type="submit" value="新建"  name="new"/> </a>
         </h3>
+		 <form action={% url 'private' 1%} method="post">
+			{% csrf_token %}
           <ul>
-              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text">
+              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
           </ul>
+		  <input type="submit" value="确定"/> 
+		  </form>
       </div>
-      <div class="item mainItem">
-        <h2>{{diary1.title}}</h2>
-        <p class="info"><span class="date">{{diary1.pub_date}}</span></p>
-        <p class="perex">{{diary1.simp_text}}</p>{% if url1 %}<a href={{url1}}>完整</a>{% endif %}
       </div>
       <!-- /#first (main) article -->
       <!-- #cols 50:50 -->
       <div class="col1">
         <div class="item itemOdd">
+          <h3>{{diary1.title}}</h3>
+          <p class="perex">{{diary1.simp_text}}</p>
+          <p class="info"><span class="date">{{diary1.pub_date}}</span></p>{% if url1 %}<a href={{url1}}>完整</a>{% endif %}
+        </div>
+        <div class="item itemEven">
           <h3>{{diary2.title}}</h3>
           <p class="perex">{{diary2.simp_text}}</p>
           <p class="info"><span class="date">{{diary2.pub_date}}</span></p>{% if url2 %}<a href={{url2}}>完整</a>{% endif %}
         </div>
-        <div class="item itemEven">
+        <div class="item itemOdd last">
           <h3>{{diary3.title}}</h3>
           <p class="perex">{{diary3.simp_text}}</p>
           <p class="info"><span class="date">{{diary3.pub_date}}</span></p>{% if url3 %}<a href={{url3}}>完整</a>{% endif %}
         </div>
-        <div class="item itemOdd last">
+		<div class="item itemEven">
           <h3>{{diary4.title}}</h3>
           <p class="perex">{{diary4.simp_text}}</p>
           <p class="info"><span class="date">{{diary4.pub_date}}</span></p>{% if url4 %}<a href={{url4}}>完整</a>{% endif %}
         </div>
-		<div class="item itemEven">
+        <div class="item itemOdd last">
           <h3>{{diary5.title}}</h3>
           <p class="perex">{{diary5.simp_text}}</p>
           <p class="info"><span class="date">{{diary5.pub_date}}</span></p>{% if url5 %}<a href={{url5}}>完整</a>{% endif %}
-        </div>
-        <div class="item itemOdd last">
-          <h3>{{diary6.title}}</h3>
-          <p class="perex">{{diary6.simp_text}}</p>
-          <p class="info"><span class="date">{{diary6.pub_date}}</span></p>{% if url6 %}<a href={{url6}}>完整</a>{% endif %}
         </div>
 		<div class="col2">
         </div>
@@ -100,6 +100,7 @@
 	  {%endif%}
         </div>
     </div>
+
     
     <!-- /#left part of web - main content -->
     <hr class="hidden" />
@@ -107,7 +108,7 @@
     <div id="menuBlock">
       <div class="box boxText firstBox">
         <h3>个人信息</h3>
-        <div class="img"><img src={{picture}} width="56" alt="" /></div>
+        <div class="img"><img src={{picture.img.url}} width="56" alt="" /></div>
         <div class="self">
           <p class="last">用户名：{{user}}<br />
             年龄:&nbsp;{{age}}&nbsp;岁<br />
@@ -132,9 +133,8 @@
           <li><a href="http://www.baidu.com">May 2008</a></li>
         </ul>
       </div>
-    </div>
     <!-- /#right part of web -->
-  </div>
+  </div></div>
   <!-- /#main content construct -->
   <!-- #accessible components - do not delete this !!! -->
   <hr class="hidden" />
