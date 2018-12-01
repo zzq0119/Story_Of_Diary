@@ -111,10 +111,17 @@ def private(request,page):
         dist['private']=reverse('private',args=(1,))
         dist['setting']=reverse('private_setting')
         dist['picture']=user
+        dist['img']=user.img
+        dist['sex']=user.sex
+        dist['year']=user.birthday.year
+        dist['month']=user.birthday.month
+        dist['day']=user.birthday.day
+        dist['phone']=user.telephone
+        dist['email']=user.email
         dist['new']=reverse('private_edit_new')
         return render(request,'private.html',dist)
     else:
-        return render(request,'index.html',{'error_message':'Login First.'})       
+        return render(request,'index.html',{'error_message':'Login First.'})      
 def private_setting(request):
     if 'u_id' in request.session and 'username' in request.session:
         u_id=request.session['u_id']
@@ -353,6 +360,7 @@ def private(request,page):
         dist['private']=reverse('private',args=(1,))
         dist['setting']=reverse('private_setting')
         dist['picture']=user
+        dist['img']=user.img
         dist['new']=reverse('private_edit_new')
         return render(request,'private.html',dist)
     else:
@@ -466,9 +474,9 @@ def private_edit_new(request):
                 diary.public=True
                 mess='public'
             diary.save()
-            dist={'back':reverse('private',args=(1,)),'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,))}
+            dist={'back':reverse('private',args=(1,)),'title':diary.title,'name':user.realname,'text':diary.diary_text,'url':reverse('private_edit',args=(diary.id,))}
             return render(request,'private_detail.html',dist)
-        dist={'url':reverse('private',args=(1,)),'picture':user,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
+        dist={'url':reverse('private',args=(1,)),'picture':user,'name':user.realname,'age':datetime.datetime.today().year-user.birthday.year,'email':user.email,'public':reverse('public',args=(1,)),'private':reverse('private',args=(1,))}
         if user.sex=="男":
             dist['sex']="男"
         elif user.sex=="女":
