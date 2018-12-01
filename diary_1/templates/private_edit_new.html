@@ -10,7 +10,6 @@
 <title>Story of diary</title>
 <link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" media="screen" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print" />
-
 <script>
 function check_form(){
     var title=document.getElementById("title");
@@ -32,7 +31,7 @@ function check_form(){
       <h1>日记故事</a></h1>
       <h2>test version</a></h2>
       <div id="search">
-      <h2>已登录：{{user_name}}</h2> 
+      <h2>已登录：{{name}}</h2> 
       <h2><a href="/private/signOut">注销</a></h2>
     </div>
     </div>
@@ -64,14 +63,13 @@ function check_form(){
       {% csrf_token %} 
        <input type="text" name="title" id="title" style="width:500px;" placeholder="请输入标题"/><hr>
 	
-      <textarea rows="10" cols="40" style=" font-size:22px; resize:none;/" placeholder="请输入日记内容" name="content" id="content"></textarea><hr>
+      <textarea rows="10" cols="40" style=" font-size:22px; resize:none" name="content" id="content"></textarea><hr>
       <ul>  
         是否公开？
         <label><input name="public" type="checkbox" value="" />是 </label> 
         <!--label><input name="check_box" type="radio" value="" checked="true"/>否 </label--> 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-      <input type="button"; value="保存" ; onclick="check_form()"; style="width:100px;height:25px;line-height:18px;font-size:18px;border-radius: 3px; background: #1E90FF;color: white;border-width: 0px; cursor: pointer; ">
- 
+      <input type="button" value="保存" onclick="check_form()"  style="width:100px;height:25px;line-height:18px;font-size:18px;border-radius: 3px; background: #1E90FF;color: white;border-width: 0px; cursor: pointer; ">
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
       <a href="/private/page/1"><input type="button" value="取消编辑" style="width:100px;height:25px;line-height:18px;font-size:18px;border-radius: 3px; background: #C0C0C0;color: white;border-width: 0px; cursor: pointer; "> </a>
 
@@ -97,7 +95,15 @@ function check_form(){
             邮箱：{{email}}<br/>
         </div>
       </div>
-      
+            <div class="box subMenu">
+        <h3>按日期查看:</h3>
+		<form action={% url 'private' 1%} method="post" id="view_by_date">
+			{% csrf_token %}
+          <ul>
+              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
+          </ul>
+		</form>
+      </div>
     </div>
     <!-- /#right part of web -->
   </div>
