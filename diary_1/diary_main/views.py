@@ -168,9 +168,12 @@ def private_detail(request,d_id):
         u_id=request.session['u_id']
         user=User.objects.get(id=u_id)
         diary=Diary.objects.get(id=d_id)
+        if request.method=="POST":
+            diary.delete()
+            return HttpResponseRedirect(reverse('private',args=(1,)))
         diary_list=user.diary_set.all()
         dist={'back':reverse('private',args=(1,)),'piture':user,'list':diary_list,'pub_date':diary.pub_date,'realname':user.realname,'age':datetime.datetime.today().year-user.birthday.year,
-              'user_name':user.username,'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,)),'email':user.email}
+              'user_name':user.username,'title':diary.title,'text':diary.diary_text,'url':reverse('private_edit',args=(d_id,)),'email':user.email,'d_id':d_id}
         if user.sex=="男":
             dist['sex']="男"
         if user.sex=="女":

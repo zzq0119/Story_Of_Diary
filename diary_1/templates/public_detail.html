@@ -25,26 +25,13 @@ color:black;
   <!-- #header (main heading + logo with slogan) -->
   <div id="head">
     <!-- main headings with search component -->
-    <div id="main">
-       <div class="box boxText firstBox">
-        <h3>我的信息</h3>
-        <div class="img"><img src={{picture.img.url}} width="56" alt="" /></div>
-        <div class="self">
-          <p class="last">昵称:{{realname}}<br />
-            年龄:&nbsp;{{age}}&nbsp;岁<br />
-            性别:{{sex}}<br />
-            email:&nbsp;{{email}}</p>
-        </div>
-    </div>
-    <p class="info"><font size="5">'</font></p> 
-    <p class="info"><font size="5">'</font></p>
-    <p class="info"><font size="5">'</font></p>
-      <form action="" method="post" id="search">
-        <fieldset>
-	<h2 style="color:black;">已登录：{{user_name}}</h2> 
+<div id="main">
+            <h1>日记故事</a></h1>
+            <h2>test version</a></h2>   
+            <div id="signout">   
+	      <h2 style="color:black;">已登录：{{user_name}}</h2> 
                 <li><a href="/private/signOut">注销</a></li>
-        </fieldset>
-      </form>
+                </div>
     </div>
     <!-- /main headings with search component -->
     <hr class="hidden" />
@@ -91,6 +78,16 @@ color:black;
   <!-- /#accessible components -->
 </div>
 <div id="menuBlock">
+	<div class="box boxText firstBox">
+                <h3>我的信息</h3>
+                <div class="img"><img src={{picture.img.url}} width="56" alt="" /></div>
+                <div class="self">
+                  <p class="last">昵称:{{realname}}<br />
+                    年龄:&nbsp;{{age}}&nbsp;岁<br />
+                    性别:{{sex}}<br />
+                    email:&nbsp;{{email}}</p>
+                </div>
+                </div>
     <!-- /#left part of web - main content -->
     <hr class="hidden" />
     <!-- #right part of web - submenu boxes with simple text -->
