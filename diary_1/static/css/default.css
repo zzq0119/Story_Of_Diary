@@ -61,7 +61,7 @@ fieldset    { border: 0 !important; }
 #main h1 a  { text-decoration: none; color: #fff !important; }
 #main h2    { font-weight: normal; font-size: 1em; padding-left: 2px; margin-top: -3px; }
 #main h2,
-#main h2 a  { color: #8bcced; text-decoration: none; }
+#main h2 a  { text-decoration: none; }
 
 #head a:hover { text-decoration: none !important; }
 
