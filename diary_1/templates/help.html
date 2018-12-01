@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html" />
+<meta name="autor" content="软工小组" />
+<meta name="description" content=""  />
+<meta name="keywords" content="" />
+<title>Story of diary</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print" />
+<script src="{% static 'datePlugin.js' %}"></script>
+</head>
+<body>
+<div id="view">
+  <!-- #header (main heading + logo with slogan) -->
+  <div id="head">
+    <!-- main headings with search component -->
+    <div id="main">
+      <h1>日记故事</h1>
+      <h2>test version</h2>
+      <form action="" method="post" id="search">
+        <fieldset>
+            <h2>已登录：{{user_name}}</h2>
+            <h2><a href="/private/signOut">注销</a></h2>
+        </fieldset>
+      </form>
+    </div>
+    <!-- /main headings with search component -->
+    <hr class="hidden" />
+    <!-- main horizontal menu -->
+    <div id="mainMenu">
+      <ul>
+           <li><a href="/public/page/1"><font size=3>日记社区<span></span></font></a></li>
+        <li class="active"><a href="/private/page/1"><font size=3>个人主页<span></span></font></a></li>
+        <li class="fr"><a href="/help"><font size=3>获取帮助<span></span></font></a></li>
+        <li class="fr"><a href="/private/setting"><font size=3>个人设置<span</span></font></a></li>
+        <li class="fr"><a href="/private/edit/new"><font size=3>新建<span></span></font></a></li>
+      </ul>
+    </div>
+    <!-- /main horizontal menu -->
+    <hr class="hidden" />
+    <!-- logo with slogan -->
+    <!-- /logo with slogan -->
+    <hr class="hidden" />
+  </div>
+  <!-- /#header (main heading + logo with slogan) -->
+  <!-- #main content construct -->
+
+  <div id="content">
+        <div style="position:relative;top:20px">
+            <h3 align="center">帮助文档</h3>
+        </div>
+    <textarea rows="40" cols="93" style=" font-size:10pt;font-family:verdana;color:#333333;background-color:white; resize:none;border:none" >
+
+
+
+
+
+         让更多用户认识您：
+	    点击个人信息，完善您的资料并上传一张图片，可以让天南海北的人更容易记住您。
+
+
+          编辑您的日记：
+	    点击新建->输入日记主题和内容->选择是否公开->点击保存，至此，您的第一份日记便成功保存，随时可再次查看。
+            公开的日记将会设置成为在公共区可见并允许他人评论，当然，您可以查看其他人公开的日记并对其内容进行评论。
+
+
+          回顾以往的日记：
+	    如果您在此之前已经保存过日记，那么进入个人中心->选择您想要回顾的日记->点击进入，即可查阅之前的日记。
+
+
+          任何建议和意见：
+	    请点击主页面“联系我们”以获取更加细致的帮助或提出您的宝贵意见，感谢您的支持。
+
+
+
+
+
+      </textarea>
+
+  </div>
+  <!-- /#main content construct -->
+  <!-- #accessible components - do not delete this !!! -->
+  <hr class="hidden" />
+  <ul class="hidden">
+    <li><a href="#view">On top</a></li>
+    <li><a href="#content">Back to content</a></li>
+  </ul>
+  <hr class="hidden" />
+  <!-- /#accessible components -->
+  <!-- #footer -->
+  <div id="foot">
+    <p class="fl">&copy; all rights reserved</p>
+    <!-- /#   LINKS AND AUTHOR-SIGNATURE CANNOT BE REMOVED !!! -->
+    <p class="fr">created by&nbsp;<a class="ico ico-breezy">软工小组</a></p>
+  </div>
+  <!-- /#footer -->
+</div>
+</body>
+</html>
