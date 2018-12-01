@@ -35,7 +35,7 @@
         <li><a href={{public}}>日记社区<span></span></a></li>
         <li class="active"><a href={{private}}>个人主页<span></span></a></li>
         <li class="fr"><a href={{new}}>新建<span></span></a></li>
-        <li class="fr">获取帮助<span></span></a></li>
+        <li class="fr"><a href={{public}}>获取帮助<span></span></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
@@ -113,19 +113,17 @@
         <ul>
           <li><a href={{setting}}>个人简介</a></li>
           <li><a href={{setting}}>照片</a></li>
-          <li><a href={{setting}}>日记</a></li>
           <li><a href={{setting}}>联系</a></li>
         </ul>
       </div>
       <div class="box subMenu">
-          <h3>按日期查看:
-        </h3>
-		 <form action={% url 'private' 1%} method="post">
+        <h3>按日期查看:</h3>
+		<form action={% url 'private' 1%} method="post" id="view_by_date">
 			{% csrf_token %}
           <ul>
-              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text">
               <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
           </ul>
+		</form>
       </div>
     </div>
     <!-- /#right part of web -->

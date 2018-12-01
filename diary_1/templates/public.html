@@ -33,14 +33,14 @@
       <ul>
         <li><a href={{public}}>日记社区<span></span></a></li>
         <li class="active"><a href={{private}}>个人主页<span></span></a></li>
-        <li class="fr"><a href="http://www.baidu.com">关于<span></span></a></li>
+        <li class="fr">关于<span></span></a></li>
         <li class="fr"><a href="http://www.baidu.com">获取帮助<span></span></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
     <hr class="hidden" />
     <!-- logo with slogan -->
-    <div id="logo"> <a href="http://www.baidu.com" class="block">&nbsp;</a>
+    <div id="logo"> <class="block">&nbsp;</a>
       <h2>分享你的故事</h2>
     </div>
     <!-- /logo with slogan -->
@@ -111,20 +111,20 @@
         <h3>个人设置:</h3>
         <ul>
           <li><a href={{setting}}>个人简介</a></li>
-          <li><a href="http://www.baidu.com">照片</a></li>
-          <li><a href="http://www.baidu.com">日记</a></li>
-          <li><a href="http://www.baidu.com">联系</a></li>
+          <li><a href={{setting}}>照片</a></li>
+          <li><a href={{private}}>日记</a></li>
+          <li><a href={{setting}}>联系</a></li>
         </ul>
       </div>
       <div class="box subMenu">
-        <h3>查看:</h3>
-        <ul>
-          <li><a href="http://www.baidu.com">January 2008</a></li>
-          <li><a href="http://www.baidu.com">February 2008</a></li>
-          <li><a href="http://www.baidu.com">March 2008</a></li>
-          <li><a href="http://www.baidu.com">April 2008</a></li>
-          <li><a href="http://www.baidu.com">May 2008</a></li>
-        </ul>
+        <h3>按日期查看:</h3>
+	<form action=/private/page/1/ method="post">
+	<input type="hidden" name="csrfmiddlewaretoken" value="uvPPSeopTupJPZgaf4k0EUM06JRv3HoHLQC8RNM03clVEkl61Pkg05B6cmKXrLpz">
+         <ul>
+           <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text" name="date">
+         </ul>
+	 <input type="submit" value="确定"/> 
+	</form>
       </div>
     </div>
     <!-- /#right part of web -->
