@@ -51,15 +51,20 @@
     <!-- #left part of web - main content -->
     <div id="contentBlock">
       <!-- #cols 50:50 -->
-	  <a href={{url}}>返回</a>
-      <form action="{% url 'private_edit_new'%}" method="post">
-{% csrf_token %}
-<textarea name=file1 rows=1 cols=100 placeholder="标题">
-</textarea><br>
-<textarea name=file rows=30 cols=100 placeholder="正文">
-</textarea><br>
-公开?<input type="checkbox" value="1" name="check_box"/>
-<input type="submit" value="保存"/> 
+<form action="form_action.asp" method="get">
+            标题： <input type="text" name="fname" />
+          </form>
+      <textarea rows="10" cols="40" style=" font-size:22px; resize:none" >
+      </textarea>
+      <ul>
+     <form action="" method="get"> 
+        是否公开？
+        <label><input name="Fruit" type="radio" value="" />是 </label> 
+        <label><input name="Fruit" type="radio" value="" />否 </label> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <input type="button" value="保存" style="color:#000000;background:#d6d4d1;">
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+      <input type="button" value="取消编辑" style="color:#000000;background:#d6d4d1;"> 
 </form>
       </ul>
       <div class="col2">
@@ -81,9 +86,9 @@
       <div class="box subMenu">
         <h3>个人设置:</h3>
         <ul>
-          <li><a href="http://www.baidu.com">个人简介</a></li>
-          <li><a href="http://www.baidu.com">照片</a></li>
-          <li><a href="http://www.baidu.com">联系</a></li>
+          <li><a href='private/setting/'>个人简介</a></li>
+          <li><a href='private/setting/'>照片</a></li>
+          <li><a href='private/setting/'>联系</a></li>
         </ul>
       </div>
       <div class="box subMenu">

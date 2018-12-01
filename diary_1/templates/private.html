@@ -35,7 +35,7 @@
         <li><a href={{public}}>日记社区<span></span></a></li>
         <li class="active"><a href={{private}}>个人主页<span></span></a></li>
         <li class="fr"><a href={{new}}>新建<span></span></a></li>
-        <li class="fr"><a href="http://www.baidu.com">获取帮助<span></span></a></li>
+        <li class="fr">获取帮助<span></span></a></li>
       </ul>
     </div>
     <!-- /main horizontal menu -->
@@ -50,12 +50,7 @@
     <div id="contentBlock">
       <!-- #first (main) article -->
 	  <div class="box subMenu">
-          <h3>按日期查看:
-          <a href={{new}}><input type="submit" value="新建"  name="new"/> </a>
-        </h3>
-          <ul>
-              <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text">
-          </ul>
+       
       </div>
       <div class="item mainItem">
         <h2>{{diary1.title}}</h2>
@@ -117,20 +112,17 @@
         <h3>个人设置:</h3>
         <ul>
           <li><a href={{setting}}>个人简介</a></li>
-          <li><a href="http://www.baidu.com">照片</a></li>
-          <li><a href="http://www.baidu.com">日记</a></li>
-          <li><a href="http://www.baidu.com">联系</a></li>
+          <li><a href={{setting}}>照片</a></li>
+          <li><a href={{setting}}>日记</a></li>
+          <li><a href={{setting}}>联系</a></li>
         </ul>
       </div>
       <div class="box subMenu">
-        <h3>查看:</h3>
-        <ul>
-          <li><a href="http://www.baidu.com">January 2008</a></li>
-          <li><a href="http://www.baidu.com">February 2008</a></li>
-          <li><a href="http://www.baidu.com">March 2008</a></li>
-          <li><a href="http://www.baidu.com">April 2008</a></li>
-          <li><a href="http://www.baidu.com">May 2008</a></li>
-        </ul>
+        <h3>查看:
+	    </h3>
+	      <ul>
+             <input onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  type="text">
+          </ul>
       </div>
     </div>
     <!-- /#right part of web -->

@@ -23,6 +23,17 @@ class Diary(models.Model):
     public=models.BooleanField(default=False)
     def __str__(self):
         return self.simp_text
+    def __iter__(self):
+        return self
+    def next(self):
+                if self._i == 0:
+                        self._i += 1
+                        return self.name
+                elif self._i == 1:
+                        self._i += 1
+                        return self.age
+                else:
+                        raise StopIteration()
        
 class Comment(models.Model):
     diary=models.ForeignKey(Diary,on_delete=models.CASCADE)
