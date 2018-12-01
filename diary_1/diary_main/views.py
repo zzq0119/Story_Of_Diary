@@ -79,6 +79,11 @@ def public(request,page):
         for i in range(len(diary_list)):
             dist['diary'+str(i+1)]=diary_list[i]
             dist['url'+str(i+1)]=reverse('public_detail',args=(diary_list[i].id,))
+        if request.method=="POST":
+            for i in range(len(diary_list)):
+                if str(i+1) in request.POST:
+                    dist['diary'+str(i+1)].praise+=1
+                    dist['diary'+str(i+1)].save()
         dist['name']=user.realname
         dist['age']=datetime.datetime.today().year-User.objects.get(id=u_id).birthday.year
         dist['public']=reverse('public',args=(1,))
@@ -94,6 +99,7 @@ def public(request,page):
         dist['day']=user.birthday.day
         dist['phone']=user.telephone
         dist['email']=user.email
+        dist['page']=page
         return render(request,'public.html',dist)
     else:
         return render(request,'index.html',{'error_message':'Login First.'})
